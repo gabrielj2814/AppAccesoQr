@@ -1,3 +1,5 @@
+# php artisan blueprint:build
+# php artisan blueprint:erase
 models:
 
   User:
