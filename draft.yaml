@@ -1,0 +1,30 @@
+models:
+
+  User:
+    id: id autoIncrement primary
+    name: string:255
+    password: string:255
+    email: string:255 unique
+    email_verified_at: timestamp nullable
+    remember_token: string:100
+    softDeletes
+    timestamps
+
+  Password_reset_token:
+    id: false
+    email: string:255 primary
+    token: string:255
+    created_at: timestamp nullable
+    timestamps: false
+
+
+  Session:
+    id: string:255 primary
+    user_id: id foreign:Users.id nullable index
+    ip_address: string:45 nullable
+    user_agent: text nullable
+    payload: longText
+    last_activity: integer index
+
+
+

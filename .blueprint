@@ -1,0 +1,16 @@
+created:
+    - database/factories/UserFactory.php
+    - database/factories/PasswordResetTokenFactory.php
+    - database/factories/SessionFactory.php
+    - database/migrations/2024_08_11_013415_create_users_table.php
+    - database/migrations/2024_08_11_013416_create_password_reset_tokens_table.php
+    - database/migrations/2024_08_11_013417_create_sessions_table.php
+    - app/Models/User.php
+    - app/Models/Password_reset_token.php
+    - app/Models/Session.php
+models:
+    User: { id: 'id autoIncrement primary', name: 'string:255', password: 'string:255', email: 'string:255 unique', email_verified_at: 'timestamp nullable', remember_token: 'string:100', softdeletes: softDeletes, timestamps: timestamps }
+    Session: { id: 'string:255 primary', user_id: 'id foreign:Users.id nullable index', ip_address: 'string:45 nullable', user_agent: 'text nullable', payload: longText, last_activity: 'integer index' }
+    Autor: { id_auto: 'integer autoIncrement primary', nombre: 'string:255', relationships: { hasMany: LibroAutor } }
+    LibroAutor: { id_libro_auto: 'integer autoIncrement primary', nombre: 'string:255', id_auto: 'id foreign:autor.id_auto' }
+    Password_reset_token: { id: false, email: 'string:255 primary', token: 'string:255', created_at: 'timestamp nullable', timestamps: false }
