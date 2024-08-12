@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Perfil extends Model
+class TipoUsuario extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -16,8 +16,8 @@ class Perfil extends Model
         'status',
     ];
 
-    protected $table = "perfil";
-    protected $primaryKey = "id_perfil";
+    protected $table = "tipo_usuario";
+    protected $primaryKey = "id_tipo_usuario";
     public $timestamps = true;
     public $incrementing = true;
     protected $keyType = "integer";
