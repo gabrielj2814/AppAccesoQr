@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('zonas', function (Blueprint $table) {
             $table->unsignedBigInteger('id_zona')->autoIncrement()->primary();
             $table->string('nombre', 255);
-            $table->integer('numero_puertas');
+            $table->integer('numero_puertas')->default(0);
             $table->time('horario_de_acceso_de_la_zona')->nullable();
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

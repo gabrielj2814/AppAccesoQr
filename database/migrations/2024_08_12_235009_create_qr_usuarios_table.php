@@ -17,9 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger('id_qr_usuario')->autoIncrement()->primary();
             $table->string('url_qr', 255);
             $table->string('token_qr', 255);
-            $table->boolean('se_puede_vencer');
+            $table->boolean('se_puede_vencer')->default(1);
             $table->date('fecha_vencimiento')->nullable();
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
             $table->foreignId('id_user')->nullable()->constrained('users')->cascadeOnDelete()->cascadeOnUpdate()->index();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

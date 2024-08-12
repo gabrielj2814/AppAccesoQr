@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('permisos', function (Blueprint $table) {
             $table->unsignedBigInteger('id_permiso')->autoIncrement()->primary();
             $table->string('nombre', 255);
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

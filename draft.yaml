@@ -7,9 +7,9 @@ models:
     id_qr_usuario: unsignedBigInteger autoIncrement primary
     url_qr: string:255
     token_qr: string:255
-    se_puede_vencer: boolean defaulr:1
+    se_puede_vencer: boolean default:1
     fecha_vencimiento: date nullable
-    status: boolean defaulr:1
+    status: boolean default:1
     id_user: id foreign:Users.id nullable index
     relationships:
       belongsTo: \App\Models\User
@@ -20,7 +20,7 @@ models:
     id: false
     id_permiso: unsignedBigInteger autoIncrement primary
     nombre: string:255
-    status: boolean defaulr:1
+    status: boolean default:1
     softDeletes
     timestamps
     relationships:
@@ -31,7 +31,7 @@ models:
     id_permiso_perfil: unsignedBigInteger autoIncrement primary
     id_perfil: id foreign:perfil.id_perfil
     id_permiso: id foreign:Permisos.id_permiso
-    status: boolean defaulr:1
+    status: boolean default:1
     softDeletes
     timestamps
 
@@ -39,9 +39,9 @@ models:
     id: false
     id_zona: unsignedBigInteger autoIncrement primary
     nombre: string:255
-    numero_puertas: integer defaulr:0
+    numero_puertas: integer default:0
     horario_de_acceso_de_la_zona: time nullable
-    status: boolean defaulr:1
+    status: boolean default:1
     softDeletes
     timestamps
     relationships:
@@ -53,7 +53,7 @@ models:
     nombre: string:255
     codigo: string:255
     id_zona: id foreign:Zonas.id_zona
-    status: boolean defaulr:1
+    status: boolean default:1
     softDeletes
     timestamps
 

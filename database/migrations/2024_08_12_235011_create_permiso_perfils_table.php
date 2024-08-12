@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('puertas', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_puerta')->autoIncrement()->primary();
-            $table->string('nombre', 255);
-            $table->string('codigo', 255);
-            $table->foreignId('id_zona')->constrained('zonas', 'id_zona')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->boolean('status');
+        Schema::create('permiso_perfils', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_permiso_perfil')->autoIncrement()->primary();
+            $table->foreignId('id_perfil')->constrained('perfil', 'id_perfil')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('id_permiso')->constrained('permisos', 'id_permiso')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->boolean('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('puertas');
+        Schema::dropIfExists('permiso_perfils');
     }
 };
