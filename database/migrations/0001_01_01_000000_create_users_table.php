@@ -11,14 +11,50 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+
+        Schema::create('perfil', function (Blueprint $table) {
+            $table->id("id_perfil");
+            $table->string('nombre');
+            $table->boolean('status');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('persona', function (Blueprint $table) {
+            $table->id("id_persona");
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->boolean('status');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('tipo_usuario', function (Blueprint $table) {
+            $table->id("id_tipo_usuario");
+            $table->string('nombre');
+            $table->boolean('status');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('pin',4)->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+            $table->boolean('status');
+            $table->unsignedBigInteger('id_perfil');
+            $table->foreign("id_perfil")->references("id_perfil")->on("perfil")->onUpdate("cascade")->onDelete("cascade");
+            $table->unsignedBigInteger('id_persona');
+            $table->foreign("id_persona")->references("id_persona")->on("persona")->onUpdate("cascade")->onDelete("cascade");
+            $table->unsignedBigInteger('id_tipo_usuario');
+            $table->foreign("id_tipo_usuario")->references("id_tipo_usuario")->on("tipo_usuario")->onUpdate("cascade")->onDelete("cascade");
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -43,6 +79,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('persona');
+        Schema::dropIfExists('tipo_usuario');
+        Schema::dropIfExists('perfil');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }

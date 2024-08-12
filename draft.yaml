@@ -2,6 +2,70 @@
 # php artisan blueprint:erase
 models:
 
+  QrUsuario:
+    id: false
+    id_qr_usuario: unsignedBigInteger autoIncrement primary
+    url_qr: string:255
+    token_qr: string:255
+    se_puede_vencer: boolean defaulr:1
+    fecha_vencimiento: date nullable
+    status: boolean defaulr:1
+    id_user: id foreign:Users.id nullable index
+    relationships:
+      belongsTo: \App\Models\User
+    softDeletes
+    timestamps
+
+  Permiso:
+    id: false
+    id_permiso: unsignedBigInteger autoIncrement primary
+    nombre: string:255
+    status: boolean defaulr:1
+    softDeletes
+    timestamps
+    relationships:
+      hasMany: PermisoPerfil
+
+  PermisoPerfil:
+    id: false
+    id_permiso_perfil: unsignedBigInteger autoIncrement primary
+    id_perfil: id foreign:perfil.id_perfil
+    id_permiso: id foreign:Permisos.id_permiso
+    status: boolean defaulr:1
+    softDeletes
+    timestamps
+
+  Zona:
+    id: false
+    id_zona: unsignedBigInteger autoIncrement primary
+    nombre: string:255
+    numero_puertas: integer defaulr:0
+    horario_de_acceso_de_la_zona: time nullable
+    status: boolean defaulr:1
+    softDeletes
+    timestamps
+    relationships:
+      hasMany: Puerta
+
+  Puerta:
+    id: false
+    id_puerta: unsignedBigInteger autoIncrement primary
+    nombre: string:255
+    codigo: string:255
+    id_zona: id foreign:Zonas.id_zona
+    status: boolean defaulr:1
+    softDeletes
+    timestamps
+
+  AccesoUsuario:
+    id: false
+    id_acceso_usuario: unsignedBigInteger autoIncrement primary
+    id_user: id foreign:Users.id nullable
+    id_zona: id foreign:Zonas.id_zona
+    softDeletes
+    timestamps
+
+
   # User:
   #   id: id autoIncrement primary
   #   name: string:255
