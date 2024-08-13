@@ -22,7 +22,6 @@ class QrUsuarioFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_qr_usuario' => $this->faker->randomNumber(),
             'url_qr' => $this->faker->regexify('[A-Za-z0-9]{255}'),
             'token_qr' => $this->faker->regexify('[A-Za-z0-9]{255}'),
             'se_puede_vencer' => $this->faker->boolean(),

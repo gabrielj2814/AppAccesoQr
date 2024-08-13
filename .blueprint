@@ -5,12 +5,12 @@ created:
     - database/factories/ZonaFactory.php
     - database/factories/PuertaFactory.php
     - database/factories/AccesoUsuarioFactory.php
-    - database/migrations/2024_08_12_235009_create_qr_usuarios_table.php
-    - database/migrations/2024_08_12_235010_create_permisos_table.php
-    - database/migrations/2024_08_12_235011_create_permiso_perfils_table.php
-    - database/migrations/2024_08_12_235012_create_zonas_table.php
-    - database/migrations/2024_08_12_235013_create_puertas_table.php
-    - database/migrations/2024_08_12_235014_create_acceso_usuarios_table.php
+    - database/migrations/2024_08_13_164025_create_qr_usuarios_table.php
+    - database/migrations/2024_08_13_164026_create_permisos_table.php
+    - database/migrations/2024_08_13_164027_create_permiso_perfils_table.php
+    - database/migrations/2024_08_13_164028_create_zonas_table.php
+    - database/migrations/2024_08_13_164029_create_puertas_table.php
+    - database/migrations/2024_08_13_164030_create_acceso_usuarios_table.php
     - app/Models/QrUsuario.php
     - app/Models/Permiso.php
     - app/Models/PermisoPerfil.php
@@ -22,9 +22,9 @@ models:
     Persona: {  }
     TipoUsuario: {  }
     User: {  }
-    QrUsuario: { id: false, id_qr_usuario: 'unsignedBigInteger autoIncrement primary', url_qr: 'string:255', token_qr: 'string:255', se_puede_vencer: 'boolean default:1', fecha_vencimiento: 'date nullable', status: 'boolean default:1', id_user: 'id foreign:Users.id nullable index', relationships: { belongsTo: \App\Models\User }, softdeletes: softDeletes, timestamps: timestamps }
-    Permiso: { id: false, id_permiso: 'unsignedBigInteger autoIncrement primary', nombre: 'string:255', status: 'boolean default:1', softdeletes: softDeletes, timestamps: timestamps, relationships: { hasMany: PermisoPerfil } }
-    PermisoPerfil: { id: false, id_permiso_perfil: 'unsignedBigInteger autoIncrement primary', id_perfil: 'id foreign:perfil.id_perfil', id_permiso: 'id foreign:Permisos.id_permiso', status: 'boolean default:1', softdeletes: softDeletes, timestamps: timestamps }
-    Zona: { id: false, id_zona: 'unsignedBigInteger autoIncrement primary', nombre: 'string:255', numero_puertas: 'integer default:0', horario_de_acceso_de_la_zona: 'time nullable', status: 'boolean default:1', softdeletes: softDeletes, timestamps: timestamps, relationships: { hasMany: Puerta } }
-    Puerta: { id: false, id_puerta: 'unsignedBigInteger autoIncrement primary', nombre: 'string:255', codigo: 'string:255', id_zona: 'id foreign:Zonas.id_zona', status: 'boolean default:1', softdeletes: softDeletes, timestamps: timestamps }
-    AccesoUsuario: { id: false, id_acceso_usuario: 'unsignedBigInteger autoIncrement primary', id_user: 'id foreign:Users.id nullable', id_zona: 'id foreign:Zonas.id_zona', softdeletes: softDeletes, timestamps: timestamps }
+    QrUsuario: { url_qr: 'string:255', token_qr: 'string:255', se_puede_vencer: 'boolean default:1', fecha_vencimiento: 'date nullable', status: 'boolean default:1', id_user: 'id foreign:Users.id nullable index', relationships: { belongsTo: \App\Models\User }, softdeletes: softDeletes, timestamps: timestamps }
+    Permiso: { nombre: 'string:255', status: 'boolean default:1', softdeletes: softDeletes, timestamps: timestamps, relationships: { hasMany: PermisoPerfil } }
+    PermisoPerfil: { id_perfil: 'id foreign:perfil.id_perfil', id_permiso: 'id foreign:Permisos.id', status: 'boolean default:1', softdeletes: softDeletes, timestamps: timestamps }
+    Zona: { nombre: 'string:255', numero_puertas: 'integer default:0', horario_de_acceso_de_la_zona: 'time nullable', status: 'boolean default:1', softdeletes: softDeletes, timestamps: timestamps, relationships: { hasMany: Puerta } }
+    Puerta: { id: false, id_puerta: 'unsignedBigInteger autoIncrement primary', nombre: 'string:255', codigo: 'string:255', id_zona: 'id foreign:Zonas.id', status: 'boolean default:1', softdeletes: softDeletes, timestamps: timestamps }
+    AccesoUsuario: { id_user: 'id foreign:Users.id nullable', id_zona: 'id foreign:Zonas.id', softdeletes: softDeletes, timestamps: timestamps }

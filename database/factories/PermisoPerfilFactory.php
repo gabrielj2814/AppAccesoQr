@@ -23,9 +23,8 @@ class PermisoPerfilFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_permiso_perfil' => $this->faker->randomNumber(),
             'id_perfil' => Perfil::factory()->create()->id_perfil,
-            'id_permiso' => Permiso::factory()->create()->id_permiso,
+            'id_permiso' => Permiso::factory(),
             'status' => $this->faker->boolean(),
         ];
     }

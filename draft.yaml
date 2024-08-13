@@ -3,8 +3,6 @@
 models:
 
   QrUsuario:
-    id: false
-    id_qr_usuario: unsignedBigInteger autoIncrement primary
     url_qr: string:255
     token_qr: string:255
     se_puede_vencer: boolean default:1
@@ -17,8 +15,6 @@ models:
     timestamps
 
   Permiso:
-    id: false
-    id_permiso: unsignedBigInteger autoIncrement primary
     nombre: string:255
     status: boolean default:1
     softDeletes
@@ -27,17 +23,13 @@ models:
       hasMany: PermisoPerfil
 
   PermisoPerfil:
-    id: false
-    id_permiso_perfil: unsignedBigInteger autoIncrement primary
     id_perfil: id foreign:perfil.id_perfil
-    id_permiso: id foreign:Permisos.id_permiso
+    id_permiso: id foreign:Permisos.id
     status: boolean default:1
     softDeletes
     timestamps
 
   Zona:
-    id: false
-    id_zona: unsignedBigInteger autoIncrement primary
     nombre: string:255
     numero_puertas: integer default:0
     horario_de_acceso_de_la_zona: time nullable
@@ -52,16 +44,14 @@ models:
     id_puerta: unsignedBigInteger autoIncrement primary
     nombre: string:255
     codigo: string:255
-    id_zona: id foreign:Zonas.id_zona
+    id_zona: id foreign:Zonas.id
     status: boolean default:1
     softDeletes
     timestamps
 
   AccesoUsuario:
-    id: false
-    id_acceso_usuario: unsignedBigInteger autoIncrement primary
     id_user: id foreign:Users.id nullable
-    id_zona: id foreign:Zonas.id_zona
+    id_zona: id foreign:Zonas.id
     softDeletes
     timestamps
 

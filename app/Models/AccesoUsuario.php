@@ -17,7 +17,6 @@ class AccesoUsuario extends Model
      * @var array
      */
     protected $fillable = [
-        'id_acceso_usuario',
         'id_user',
         'id_zona',
     ];
@@ -28,7 +27,7 @@ class AccesoUsuario extends Model
      * @var array
      */
     protected $casts = [
-        'id_acceso_usuario' => 'integer',
+        'id' => 'integer',
         'id_user' => 'integer',
         'id_zona' => 'integer',
     ];
@@ -38,8 +37,8 @@ class AccesoUsuario extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function zona(): BelongsTo
+    public function idZona(): BelongsTo
     {
-        return $this->belongsTo(Zona::class, 'id_zona', 'id_zona');
+        return $this->belongsTo(Zona::class);
     }
 }

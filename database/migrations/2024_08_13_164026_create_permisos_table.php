@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
 
         Schema::create('permisos', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_permiso')->autoIncrement()->primary();
+            $table->id();
             $table->string('nombre', 255);
             $table->boolean('status')->default(1);
             $table->timestamps();

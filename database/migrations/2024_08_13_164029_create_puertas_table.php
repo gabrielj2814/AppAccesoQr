@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('acceso_usuarios', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_acceso_usuario')->autoIncrement()->primary();
-            $table->foreignId('id_user')->nullable()->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('id_zona')->constrained('zonas', 'id_zona')->cascadeOnDelete()->cascadeOnUpdate();
+        Schema::create('puertas', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_puerta')->autoIncrement()->primary();
+            $table->string('nombre', 255);
+            $table->string('codigo', 255);
+            $table->foreignId('id_zona')->constrained('zonas')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->boolean('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('acceso_usuarios');
+        Schema::dropIfExists('puertas');
     }
 };

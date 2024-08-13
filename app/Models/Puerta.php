@@ -35,8 +35,8 @@ class Puerta extends Model
         'status' => 'boolean',
     ];
 
-    public function zona(): BelongsTo
+    public function idZona(): BelongsTo
     {
-        return $this->belongsTo(Zona::class, 'id_zona', 'id_zona');
+        return $this->belongsTo(Zona::class);
     }
 }

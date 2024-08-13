@@ -17,7 +17,6 @@ class PermisoPerfil extends Model
      * @var array
      */
     protected $fillable = [
-        'id_permiso_perfil',
         'id_perfil',
         'id_permiso',
         'status',
@@ -29,7 +28,7 @@ class PermisoPerfil extends Model
      * @var array
      */
     protected $casts = [
-        'id_permiso_perfil' => 'integer',
+        'id' => 'integer',
         'id_perfil' => 'integer',
         'id_permiso' => 'integer',
         'status' => 'boolean',
@@ -40,8 +39,8 @@ class PermisoPerfil extends Model
         return $this->belongsTo(Perfil::class, 'id_perfil', 'id_perfil');
     }
 
-    public function permiso(): BelongsTo
+    public function idPermiso(): BelongsTo
     {
-        return $this->belongsTo(Permiso::class, 'id_permiso', 'id_permiso');
+        return $this->belongsTo(Permiso::class);
     }
 }

@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('permiso_perfils', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_permiso_perfil')->autoIncrement()->primary();
-            $table->foreignId('id_perfil')->constrained('perfil', 'id_perfil')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('id_permiso')->constrained('permisos', 'id_permiso')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->boolean('status')->default(1);
+        Schema::create('acceso_usuarios', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('id_user')->nullable()->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('id_zona')->constrained('zonas')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permiso_perfils');
+        Schema::dropIfExists('acceso_usuarios');
     }
 };

@@ -17,7 +17,6 @@ class Zona extends Model
      * @var array
      */
     protected $fillable = [
-        'id_zona',
         'nombre',
         'numero_puertas',
         'horario_de_acceso_de_la_zona',
@@ -30,7 +29,7 @@ class Zona extends Model
      * @var array
      */
     protected $casts = [
-        'id_zona' => 'integer',
+        'id' => 'integer',
         'status' => 'boolean',
     ];
 

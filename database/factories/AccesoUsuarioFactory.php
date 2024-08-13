@@ -23,9 +23,8 @@ class AccesoUsuarioFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_acceso_usuario' => $this->faker->randomNumber(),
             'id_user' => User::factory(),
-            'id_zona' => Zona::factory()->create()->id_zona,
+            'id_zona' => Zona::factory(),
         ];
     }
 }

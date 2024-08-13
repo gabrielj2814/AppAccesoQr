@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
 
         Schema::create('zonas', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_zona')->autoIncrement()->primary();
+            $table->id();
             $table->string('nombre', 255);
             $table->integer('numero_puertas')->default(0);
             $table->time('horario_de_acceso_de_la_zona')->nullable();

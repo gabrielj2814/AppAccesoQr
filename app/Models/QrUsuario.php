@@ -17,7 +17,6 @@ class QrUsuario extends Model
      * @var array
      */
     protected $fillable = [
-        'id_qr_usuario',
         'url_qr',
         'token_qr',
         'se_puede_vencer',
@@ -33,7 +32,7 @@ class QrUsuario extends Model
      * @var array
      */
     protected $casts = [
-        'id_qr_usuario' => 'integer',
+        'id' => 'integer',
         'se_puede_vencer' => 'boolean',
         'fecha_vencimiento' => 'date',
         'status' => 'boolean',

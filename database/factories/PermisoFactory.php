@@ -21,7 +21,6 @@ class PermisoFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_permiso' => $this->faker->randomNumber(),
             'nombre' => $this->faker->regexify('[A-Za-z0-9]{255}'),
             'status' => $this->faker->boolean(),
         ];

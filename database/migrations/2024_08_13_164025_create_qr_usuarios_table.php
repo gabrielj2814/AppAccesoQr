@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
 
         Schema::create('qr_usuarios', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_qr_usuario')->autoIncrement()->primary();
+            $table->id();
             $table->string('url_qr', 255);
             $table->string('token_qr', 255);
             $table->boolean('se_puede_vencer')->default(1);

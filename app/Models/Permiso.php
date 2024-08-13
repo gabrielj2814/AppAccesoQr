@@ -17,7 +17,6 @@ class Permiso extends Model
      * @var array
      */
     protected $fillable = [
-        'id_permiso',
         'nombre',
         'status',
     ];
@@ -28,7 +27,7 @@ class Permiso extends Model
      * @var array
      */
     protected $casts = [
-        'id_permiso' => 'integer',
+        'id' => 'integer',
         'status' => 'boolean',
     ];
 
