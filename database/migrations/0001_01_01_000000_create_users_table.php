@@ -43,17 +43,17 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('pin',4)->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
             $table->boolean('status');
-            $table->unsignedBigInteger('id_perfil');
+            $table->unsignedBigInteger('id_perfil')->nullable();
             $table->foreign("id_perfil")->references("id_perfil")->on("perfil")->onUpdate("cascade")->onDelete("cascade");
             $table->unsignedBigInteger('id_persona');
             $table->foreign("id_persona")->references("id_persona")->on("persona")->onUpdate("cascade")->onDelete("cascade");
-            $table->unsignedBigInteger('id_tipo_usuario');
+            $table->unsignedBigInteger('id_tipo_usuario')->nullable();
             $table->foreign("id_tipo_usuario")->references("id_tipo_usuario")->on("tipo_usuario")->onUpdate("cascade")->onDelete("cascade");
         });
 

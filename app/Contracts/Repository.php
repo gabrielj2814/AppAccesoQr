@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 interface Repository {
 
-    public function registrar(array $datos): void;
+    public function registrar(array $datos): Model;
 
-    public function actualizar(array $datos): void;
+    public function actualizar(array $datos): Model;
 
     public function eliminar(int $id): void;
 

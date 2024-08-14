@@ -9,19 +9,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class PerfilRepository implements RepositoryBorradoSuave{
 
-    function registrar(array $datos): void{
+    function registrar(array $datos): Model{
         $perfil= new Perfil();
         $perfil->nombre=$datos["nombre"];
         $perfil->status=$datos["status"];
         $perfil->save();
+        return $perfil;
     }
 
-    function actualizar(array $datos): void
+    function actualizar(array $datos): Model
     {
         $perfil= $this->consultarPorId($datos["id_perfil"]);
         $perfil->nombre=$datos["nombre"];
         $perfil->status=$datos["status"];
         $perfil->save();
+        return $perfil;
     }
 
     function consultarPorId(int $id): Model
