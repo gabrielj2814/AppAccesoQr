@@ -18,8 +18,8 @@ class PermisoPerfil extends Model
      */
     protected $fillable = [
         'id_perfil',
-        'id_permiso',
         'status',
+        'permiso_id',
     ];
 
     /**
@@ -30,17 +30,17 @@ class PermisoPerfil extends Model
     protected $casts = [
         'id' => 'integer',
         'id_perfil' => 'integer',
-        'id_permiso' => 'integer',
         'status' => 'boolean',
+        'permiso_id' => 'integer',
     ];
+
+    public function permiso(): BelongsTo
+    {
+        return $this->belongsTo(Permiso::class);
+    }
 
     public function perfil(): BelongsTo
     {
         return $this->belongsTo(Perfil::class, 'id_perfil', 'id_perfil');
-    }
-
-    public function idPermiso(): BelongsTo
-    {
-        return $this->belongsTo(Permiso::class);
     }
 }

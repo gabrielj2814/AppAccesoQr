@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('permiso_perfils', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_perfil')->constrained('perfil', 'id_perfil')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('id_permiso')->constrained('permisos')->cascadeOnDelete()->cascadeOnUpdate();
             $table->boolean('status')->default(1);
+            $table->foreignId('permiso_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
         });

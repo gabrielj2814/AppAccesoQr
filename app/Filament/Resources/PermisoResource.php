@@ -2,10 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PerfilResource\Pages;
-use App\Filament\Resources\PerfilResource\RelationManagers;
-use App\Filament\Resources\PerfilResource\RelationManagers\PermisoPerfilRelationManager;
-use App\Models\Perfil;
+use App\Filament\Resources\PermisoResource\Pages;
+use App\Filament\Resources\PermisoResource\RelationManagers;
+use App\Models\Permiso;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,11 +14,11 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PerfilResource extends Resource
+class PermisoResource extends Resource
 {
     protected static ?string $recordTitleAttribute = "nombre";
 
-    protected static ?string $model = Perfil::class;
+    protected static ?string $model = Permiso::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -43,6 +42,7 @@ class PerfilResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -55,16 +55,15 @@ class PerfilResource extends Resource
     {
         return [
             //
-            PermisoPerfilRelationManager::class
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPerfils::route('/'),
-            'create' => Pages\CreatePerfil::route('/create'),
-            'edit' => Pages\EditPerfil::route('/{record}/edit'),
+            'index' => Pages\ListPermisos::route('/'),
+            'create' => Pages\CreatePermiso::route('/create'),
+            'edit' => Pages\EditPermiso::route('/{record}/edit'),
         ];
     }
 }

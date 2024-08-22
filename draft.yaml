@@ -24,8 +24,9 @@ models:
 
   PermisoPerfil:
     id_perfil: id foreign:perfil.id_perfil
-    id_permiso: id foreign:Permisos.id
     status: boolean default:1
+    relationships:
+      belongsTo: Permiso
     softDeletes
     timestamps
 

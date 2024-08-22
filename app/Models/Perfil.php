@@ -22,6 +22,10 @@ class Perfil extends Model
     public $incrementing = true;
     protected $keyType = "integer";
 
+    public function PermisoPerfil(){
+        return $this->hasMany(PermisoPerfil::class,"id_perfil","id_perfil");
+    }
+
     public function usuarios(){
         return $this->hasMany(User::class,"id","id");
     }

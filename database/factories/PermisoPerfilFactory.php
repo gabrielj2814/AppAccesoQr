@@ -24,8 +24,8 @@ class PermisoPerfilFactory extends Factory
     {
         return [
             'id_perfil' => Perfil::factory()->create()->id_perfil,
-            'id_permiso' => Permiso::factory(),
             'status' => $this->faker->boolean(),
+            'permiso_id' => Permiso::factory(),
         ];
     }
 }
