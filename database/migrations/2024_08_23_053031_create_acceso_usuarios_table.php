@@ -15,8 +15,10 @@ return new class extends Migration
 
         Schema::create('acceso_usuarios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user')->nullable()->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('id_user')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('id_zona')->constrained('zonas')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->date('fecha');
+            $table->time('hora');
             $table->timestamps();
             $table->softDeletes();
         });

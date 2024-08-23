@@ -18,7 +18,7 @@ class EditPerfil extends EditRecord
     public function form(Form $form): Form{
         return $form->schema([
             Section::make("Formulario")->schema([
-                TextInput::make('nombre')->label("Nombre")->required(),
+                TextInput::make('nombre')->label("Nombre")->required()->autocomplete(false),
                 Radio::make('status')
                 ->boolean()
                 ->inline()

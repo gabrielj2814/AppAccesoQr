@@ -22,7 +22,6 @@ class PuertaFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_puerta' => $this->faker->randomNumber(),
             'nombre' => $this->faker->regexify('[A-Za-z0-9]{255}'),
             'codigo' => $this->faker->regexify('[A-Za-z0-9]{255}'),
             'id_zona' => Zona::factory(),

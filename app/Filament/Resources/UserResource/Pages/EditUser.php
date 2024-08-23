@@ -40,9 +40,9 @@ class EditUser extends EditRecord
                    ->options($personaOpciones)
                    ->searchable()
                    ->required(),
-                TextInput::make('name')->label("Nickname")->required(),
-                TextInput::make('email')->email()->required(),
-                TextInput::make('pin')->minLength(4)->maxLength(4),
+                TextInput::make('name')->label("Nickname")->required()->autocomplete(false),
+                TextInput::make('email')->email()->required()->autocomplete(false),
+                TextInput::make('pin')->minLength(4)->maxLength(4)->autocomplete(false),
                 Select::make("id_perfil")
                     ->label("Perfiles")
                     ->options($perfilOpciones)

@@ -20,6 +20,7 @@ class Zona extends Model
         'nombre',
         'numero_puertas',
         'horario_de_acceso_de_la_zona',
+        'horario_de_cierre_de_la_zona',
         'status',
     ];
 

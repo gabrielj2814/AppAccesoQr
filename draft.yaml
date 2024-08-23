@@ -34,6 +34,7 @@ models:
     nombre: string:255
     numero_puertas: integer default:0
     horario_de_acceso_de_la_zona: time nullable
+    horario_de_cierre_de_la_zona: time nullable
     status: boolean default:1
     softDeletes
     timestamps
@@ -41,8 +42,6 @@ models:
       hasMany: Puerta
 
   Puerta:
-    id: false
-    id_puerta: unsignedBigInteger autoIncrement primary
     nombre: string:255
     codigo: string:255
     id_zona: id foreign:Zonas.id
@@ -51,8 +50,10 @@ models:
     timestamps
 
   AccesoUsuario:
-    id_user: id foreign:Users.id nullable
+    id_user: id foreign:Users.id
     id_zona: id foreign:Zonas.id
+    fecha: Date
+    hora: time
     softDeletes
     timestamps
 

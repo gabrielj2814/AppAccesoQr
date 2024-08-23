@@ -17,7 +17,6 @@ class Puerta extends Model
      * @var array
      */
     protected $fillable = [
-        'id_puerta',
         'nombre',
         'codigo',
         'id_zona',
@@ -30,7 +29,7 @@ class Puerta extends Model
      * @var array
      */
     protected $casts = [
-        'id_puerta' => 'integer',
+        'id' => 'integer',
         'id_zona' => 'integer',
         'status' => 'boolean',
     ];

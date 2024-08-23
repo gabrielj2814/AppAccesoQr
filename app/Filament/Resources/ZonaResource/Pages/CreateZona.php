@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Filament\Resources\PerfilResource\Pages;
+namespace App\Filament\Resources\ZonaResource\Pages;
 
-use App\Filament\Resources\PerfilResource;
+use App\Filament\Resources\ZonaResource;
 use Filament\Actions;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -11,14 +12,20 @@ use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreatePerfil extends CreateRecord
+class CreateZona extends CreateRecord
 {
-    protected static string $resource = PerfilResource::class;
+    protected static string $resource = ZonaResource::class;
 
-    public function form(Form $form): Form{
+
+    public function form(Form $form): Form
+    {
         return $form->schema([
-            Section::make("Formulario")->schema([
+            Section::make("Formulario")
+            ->schema([
                 TextInput::make('nombre')->label("Nombre")->required()->autocomplete(false),
+                TextInput::make('numero_puertas')->label("Numero de Puertas")->numeric()->required()->default(0)->autocomplete(false),
+                DateTimePicker::make("horario_de_acceso_de_la_zona")->date(false),
+                DateTimePicker::make("horario_de_cierre_de_la_zona")->date(false),
                 Radio::make('status')
                 ->boolean()
                 ->inline()
@@ -28,7 +35,7 @@ class CreatePerfil extends CreateRecord
         ]);
     }
 
-    protected function getSavedNotification(): ?Notification
+    protected function getCreatedNotification(): ?Notification
     {
         return Notification::make()
             ->success()
@@ -40,6 +47,5 @@ class CreatePerfil extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
-
 
 }

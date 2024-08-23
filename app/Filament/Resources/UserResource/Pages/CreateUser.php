@@ -44,8 +44,8 @@ class CreateUser extends CreateRecord
                    ->options($personaOpciones)
                    ->searchable()
                    ->required(),
-                TextInput::make('name')->label("Nickname")->required(),
-                TextInput::make('email')->email()->required(),
+                TextInput::make('name')->label("Nickname")->required()->autocomplete(false),
+                TextInput::make('email')->email()->required()->autocomplete(false),
                 Select::make("id_perfil")
                     ->label("Perfiles")
                     ->options($perfilOpciones)

@@ -19,6 +19,8 @@ class AccesoUsuario extends Model
     protected $fillable = [
         'id_user',
         'id_zona',
+        'fecha',
+        'hora',
     ];
 
     /**
@@ -30,6 +32,7 @@ class AccesoUsuario extends Model
         'id' => 'integer',
         'id_user' => 'integer',
         'id_zona' => 'integer',
+        'fecha' => 'date',
     ];
 
     public function idUser(): BelongsTo
