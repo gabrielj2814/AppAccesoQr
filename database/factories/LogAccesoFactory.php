@@ -4,17 +4,18 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Puerta;
-use App\Models\Zona;
+use App\Models\LogAcceso;
+use App\Models\QrUsuario;
+use App\Models\User;
 
-class PuertaFactory extends Factory
+class LogAccesoFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Puerta::class;
+    protected $model = LogAcceso::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +23,10 @@ class PuertaFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->faker->regexify('[A-Za-z0-9]{255}'),
-            'codigo' => $this->faker->regexify('[A-Za-z0-9]{255}'),
-            'status' => $this->faker->boolean(),
-            'zona_id' => Zona::factory(),
+            'fecha' => $this->faker->date(),
+            'hora' => $this->faker->time(),
+            'qr_usuario_id' => QrUsuario::factory(),
+            'user_id' => User::factory(),
         ];
     }
 }

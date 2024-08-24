@@ -37,7 +37,7 @@ class PermisoPerfilRelationManager extends RelationManager
         return $form
             ->schema([
                 Placeholder::make("informacion")
-                ->label($this->ownerRecord->nombre),
+                ->label("Perfil: ".$this->ownerRecord->nombre),
                 Hidden::make("id_perfil")->default($this->ownerRecord->id_perfil),
                 Select::make("permiso_id")
                     ->label("Permiso")

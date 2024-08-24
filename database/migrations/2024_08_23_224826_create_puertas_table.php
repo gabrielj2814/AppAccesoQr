@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 255);
             $table->string('codigo', 255);
-            $table->foreignId('id_zona')->constrained('zonas')->cascadeOnDelete()->cascadeOnUpdate();
             $table->boolean('status')->default(1);
+            $table->foreignId('zona_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
         });

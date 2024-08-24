@@ -22,7 +22,6 @@ class QrUsuario extends Model
         'se_puede_vencer',
         'fecha_vencimiento',
         'status',
-        'id_user',
         'user_id',
     ];
 
@@ -36,16 +35,10 @@ class QrUsuario extends Model
         'se_puede_vencer' => 'boolean',
         'fecha_vencimiento' => 'date',
         'status' => 'boolean',
-        'id_user' => 'integer',
         'user_id' => 'integer',
     ];
 
     public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function idUser(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

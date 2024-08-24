@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ZonaResource\Pages;
 use App\Filament\Resources\ZonaResource\RelationManagers;
+use App\Filament\Resources\ZonaResource\RelationManagers\PuertasRelationManager;
 use App\Models\Zona;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -62,7 +63,7 @@ class ZonaResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PuertasRelationManager::class
         ];
     }
 

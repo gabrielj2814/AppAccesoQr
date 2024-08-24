@@ -8,7 +8,6 @@ models:
     se_puede_vencer: boolean default:1
     fecha_vencimiento: date nullable
     status: boolean default:1
-    id_user: id foreign:Users.id nullable index
     relationships:
       belongsTo: \App\Models\User
     softDeletes
@@ -39,22 +38,28 @@ models:
     softDeletes
     timestamps
     relationships:
-      hasMany: Puerta
+      hasMany: Puerta, AccesoUsuario
 
   Puerta:
     nombre: string:255
     codigo: string:255
-    id_zona: id foreign:Zonas.id
     status: boolean default:1
+    relationships:
+      belongsTo: Zona
     softDeletes
     timestamps
 
   AccesoUsuario:
-    id_user: id foreign:Users.id
-    id_zona: id foreign:Zonas.id
-    fecha: Date
-    hora: time
+    relationships:
+      belongsTo: \App\Models\User, Zona
     softDeletes
+    timestamps
+
+  LogAcceso:
+    fecha: Date
+    hora: Time
+    relationships:
+      belongsTo: QrUsuario, \App\Models\User
     timestamps
 
 

@@ -64,8 +64,12 @@ class User extends Authenticatable
         return $this->belongsTo(Persona::class,"id_persona","id_persona");
     }
 
-    public function qrUsuario(){
-        return $this->belongsTo(QrUsuario::class,"id_user","id");
+    public function qrusuario(){
+        return $this->belongsTo(QrUsuario::class,"user_id","id");
+    }
+
+    public function acceso(){
+        return $this->hasMany(AccesoUsuario::class,"user_id","id");
     }
 
 }

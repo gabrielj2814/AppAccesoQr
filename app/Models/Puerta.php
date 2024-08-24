@@ -19,8 +19,8 @@ class Puerta extends Model
     protected $fillable = [
         'nombre',
         'codigo',
-        'id_zona',
         'status',
+        'zona_id',
     ];
 
     /**
@@ -30,11 +30,11 @@ class Puerta extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'id_zona' => 'integer',
         'status' => 'boolean',
+        'zona_id' => 'integer',
     ];
 
-    public function idZona(): BelongsTo
+    public function zona(): BelongsTo
     {
         return $this->belongsTo(Zona::class);
     }

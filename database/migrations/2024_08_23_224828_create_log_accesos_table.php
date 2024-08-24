@@ -13,17 +13,13 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('qr_usuarios', function (Blueprint $table) {
+        Schema::create('log_accesos', function (Blueprint $table) {
             $table->id();
-            $table->string('url_qr', 255);
-            $table->string('token_qr', 255);
-            $table->boolean('se_puede_vencer')->default(1);
-            $table->date('fecha_vencimiento')->nullable();
-            $table->boolean('status')->default(1);
-            $table->foreignId('id_user')->nullable()->constrained('users')->cascadeOnDelete()->cascadeOnUpdate()->index();
+            $table->date('fecha');
+            $table->time('hora');
+            $table->foreignId('qr_usuario_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
-            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('qr_usuarios');
+        Schema::dropIfExists('log_accesos');
     }
 };

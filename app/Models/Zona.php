@@ -38,4 +38,9 @@ class Zona extends Model
     {
         return $this->hasMany(Puerta::class);
     }
+
+    public function accesoUsuarios(): HasMany
+    {
+        return $this->hasMany(AccesoUsuario::class);
+    }
 }

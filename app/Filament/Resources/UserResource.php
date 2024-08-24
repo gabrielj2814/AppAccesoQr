@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\UserResource\RelationManagers\AccesoRelationManager;
 use App\Filament\Resources\UserResource\RelationManagers\PerfilRelationManager;
 use App\Models\Perfil;
 use App\Models\User;
@@ -67,7 +68,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            // PerfilRelationManager::class
+            AccesoRelationManager::class
         ];
     }
 

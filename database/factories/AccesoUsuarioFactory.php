@@ -23,10 +23,8 @@ class AccesoUsuarioFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_user' => User::factory(),
-            'id_zona' => Zona::factory(),
-            'fecha' => $this->faker->date(),
-            'hora' => $this->faker->time(),
+            'user_id' => User::factory(),
+            'zona_id' => Zona::factory(),
         ];
     }
 }

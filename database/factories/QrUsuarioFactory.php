@@ -27,7 +27,6 @@ class QrUsuarioFactory extends Factory
             'se_puede_vencer' => $this->faker->boolean(),
             'fecha_vencimiento' => $this->faker->date(),
             'status' => $this->faker->boolean(),
-            'id_user' => User::factory(),
             'user_id' => User::factory(),
         ];
     }
