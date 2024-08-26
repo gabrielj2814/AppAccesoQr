@@ -3,6 +3,8 @@ FROM php:8.3.6-fpm-alpine
 # Set working directory
 WORKDIR /var/www/html
 
+# COPY "docker-php-ini/extra-php.ini" "${PHP_INI_DIR}/conf.d"
+
 # Install system dependencies and PHP extensions
 RUN apk add --no-cache $PHPIZE_DEPS linux-headers \
     # Install dependencies for GD extension (ensure all necessary image types are supported)

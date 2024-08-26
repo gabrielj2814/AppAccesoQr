@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class UserResource extends Resource
 {
 
+    protected static ?string $navigationLabel = 'Usuarios';
+
     protected static ?string $recordTitleAttribute = "name";
 
     protected static ?string $model = User::class;

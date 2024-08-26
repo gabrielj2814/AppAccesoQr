@@ -17,6 +17,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PerfilResource extends Resource
 {
+
+    protected static ?string $navigationLabel = 'Perfiles';
+
+
     protected static ?string $recordTitleAttribute = "nombre";
 
     protected static ?string $model = Perfil::class;
