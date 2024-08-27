@@ -3,9 +3,9 @@
 models:
 
   QrUsuario:
-    url_qr: string:255
+    uuid: string:255
     token_qr: string:255
-    se_puede_vencer: boolean default:1
+    se_puede_vencer: boolean default:0
     fecha_vencimiento: date nullable
     status: boolean default:1
     relationships:

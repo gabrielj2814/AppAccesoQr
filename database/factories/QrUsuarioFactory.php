@@ -22,7 +22,7 @@ class QrUsuarioFactory extends Factory
     public function definition(): array
     {
         return [
-            'url_qr' => $this->faker->regexify('[A-Za-z0-9]{255}'),
+            'uuid' => $this->faker->uuid(),
             'token_qr' => $this->faker->regexify('[A-Za-z0-9]{255}'),
             'se_puede_vencer' => $this->faker->boolean(),
             'fecha_vencimiento' => $this->faker->date(),

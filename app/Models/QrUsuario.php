@@ -17,7 +17,7 @@ class QrUsuario extends Model
      * @var array
      */
     protected $fillable = [
-        'url_qr',
+        'uuid',
         'token_qr',
         'se_puede_vencer',
         'fecha_vencimiento',
