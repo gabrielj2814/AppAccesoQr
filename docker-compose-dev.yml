@@ -17,6 +17,7 @@ services:
       - db-mysql
     networks:
       - app_api_laravel_acceso_qr
+      - nginxproxymanager_default
 
   php-app-acceso-qr:
     build:
@@ -104,7 +105,5 @@ volumes:
 networks:
   app_api_laravel_acceso_qr:
     driver: bridge
-#   api_socket_node-api-vitacar:
-#     external: true
-#   nginxproxymanager_default:
-#     external: true
+  nginxproxymanager_default:
+    external: true
