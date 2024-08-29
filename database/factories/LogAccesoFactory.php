@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\LogAcceso;
+use App\Models\Puerta;
 use App\Models\QrUsuario;
 use App\Models\User;
 
@@ -25,7 +26,9 @@ class LogAccesoFactory extends Factory
         return [
             'fecha' => $this->faker->date(),
             'hora' => $this->faker->time(),
+            'lado' => $this->faker->regexify('[A-Za-z0-9]{10}'),
             'qr_usuario_id' => QrUsuario::factory(),
+            'puerta_id' => Puerta::factory(),
             'user_id' => User::factory(),
         ];
     }

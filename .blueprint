@@ -6,13 +6,13 @@ created:
     - database/factories/PuertaFactory.php
     - database/factories/AccesoUsuarioFactory.php
     - database/factories/LogAccesoFactory.php
-    - database/migrations/2024_08_27_004759_create_qr_usuarios_table.php
-    - database/migrations/2024_08_27_004800_create_permisos_table.php
-    - database/migrations/2024_08_27_004801_create_permiso_perfils_table.php
-    - database/migrations/2024_08_27_004802_create_zonas_table.php
-    - database/migrations/2024_08_27_004803_create_puertas_table.php
-    - database/migrations/2024_08_27_004804_create_acceso_usuarios_table.php
-    - database/migrations/2024_08_27_004805_create_log_accesos_table.php
+    - database/migrations/2024_08_28_235910_create_qr_usuarios_table.php
+    - database/migrations/2024_08_28_235911_create_permisos_table.php
+    - database/migrations/2024_08_28_235912_create_permiso_perfils_table.php
+    - database/migrations/2024_08_28_235913_create_zonas_table.php
+    - database/migrations/2024_08_28_235914_create_puertas_table.php
+    - database/migrations/2024_08_28_235915_create_acceso_usuarios_table.php
+    - database/migrations/2024_08_28_235916_create_log_accesos_table.php
     - app/Models/QrUsuario.php
     - app/Models/Permiso.php
     - app/Models/PermisoPerfil.php
@@ -28,7 +28,7 @@ models:
     QrUsuario: { uuid: 'string:255', token_qr: 'string:255', se_puede_vencer: 'boolean default:0', fecha_vencimiento: 'date nullable', status: 'boolean default:1', relationships: { belongsTo: \App\Models\User }, softdeletes: softDeletes, timestamps: timestamps }
     Permiso: { nombre: 'string:255', status: 'boolean default:1', softdeletes: softDeletes, timestamps: timestamps, relationships: { hasMany: PermisoPerfil } }
     PermisoPerfil: { id_perfil: 'id foreign:perfil.id_perfil', status: 'boolean default:1', relationships: { belongsTo: Permiso }, softdeletes: softDeletes, timestamps: timestamps }
-    Zona: { nombre: 'string:255', numero_puertas: 'integer default:0', horario_de_acceso_de_la_zona: 'time nullable', horario_de_cierre_de_la_zona: 'time nullable', status: 'boolean default:1', softdeletes: softDeletes, timestamps: timestamps, relationships: { hasMany: 'Puerta, AccesoUsuario' } }
-    Puerta: { nombre: 'string:255', codigo: 'string:255', status: 'boolean default:1', relationships: { belongsTo: Zona }, softdeletes: softDeletes, timestamps: timestamps }
+    Zona: { nombre: 'string:255', numero_puertas: 'integer default:1', horario_de_acceso_de_la_zona: 'time nullable', horario_de_cierre_de_la_zona: 'time nullable', status: 'boolean default:1', softdeletes: softDeletes, timestamps: timestamps, relationships: { hasMany: 'Puerta, AccesoUsuario' } }
+    Puerta: { nombre: 'string:255', codigo: 'string:255', entrada: 'boolean default:1', salida: 'boolean default:1', status: 'boolean default:1', relationships: { belongsTo: Zona }, softdeletes: softDeletes, timestamps: timestamps }
     AccesoUsuario: { relationships: { belongsTo: '\App\Models\User, Zona' }, softdeletes: softDeletes, timestamps: timestamps }
-    LogAcceso: { fecha: Date, hora: Time, relationships: { belongsTo: 'QrUsuario, \App\Models\User' }, timestamps: timestamps }
+    LogAcceso: { fecha: Date, hora: Time, lado: 'string:10', relationships: { belongsTo: 'QrUsuario, Puerta, \App\Models\User' }, timestamps: timestamps }

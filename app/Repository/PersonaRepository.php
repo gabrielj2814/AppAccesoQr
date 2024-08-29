@@ -28,7 +28,7 @@ class PersonaRepository implements RepositoryBorradoSuave {
         return $persona;
     }
 
-    function consultarPorId(int $id): Model
+    function consultarPorId(int $id): Model | null
     {
         return Persona::find($id);
     }
@@ -49,12 +49,12 @@ class PersonaRepository implements RepositoryBorradoSuave {
         return Persona::onlyTrashed()->get();
     }
 
-    function consultarPorIdEnLaPapelera($id): Model
+    function consultarPorIdEnLaPapelera($id): Model | null
     {
         return Persona::onlyTrashed()->find($id);
     }
 
-    function recuperarDeLaPapeleraPorId(int $id): Model
+    function recuperarDeLaPapeleraPorId(int $id): Model | null
     {
         Persona::onlyTrashed()->find($id)->restore();
         return $this->consultarPorId($id);

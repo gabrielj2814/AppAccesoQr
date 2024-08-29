@@ -23,7 +23,7 @@ class CreateZona extends CreateRecord
             Section::make("Formulario")
             ->schema([
                 TextInput::make('nombre')->label("Nombre")->required()->autocomplete(false),
-                TextInput::make('numero_puertas')->label("Numero de Puertas")->numeric()->required()->default(0)->autocomplete(false),
+                TextInput::make('numero_puertas')->label("Numero de Puertas")->numeric()->required()->default(1)->autocomplete(false),
                 DateTimePicker::make("horario_de_acceso_de_la_zona")->date(false),
                 DateTimePicker::make("horario_de_cierre_de_la_zona")->date(false),
                 Radio::make('status')

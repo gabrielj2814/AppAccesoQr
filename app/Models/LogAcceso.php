@@ -18,7 +18,9 @@ class LogAcceso extends Model
     protected $fillable = [
         'fecha',
         'hora',
+        'lado',
         'qr_usuario_id',
+        'puerta_id',
         'user_id',
     ];
 
@@ -31,12 +33,18 @@ class LogAcceso extends Model
         'id' => 'integer',
         'fecha' => 'date',
         'qr_usuario_id' => 'integer',
+        'puerta_id' => 'integer',
         'user_id' => 'integer',
     ];
 
     public function qrUsuario(): BelongsTo
     {
         return $this->belongsTo(QrUsuario::class);
+    }
+
+    public function puerta(): BelongsTo
+    {
+        return $this->belongsTo(Puerta::class);
     }
 
     public function user(): BelongsTo

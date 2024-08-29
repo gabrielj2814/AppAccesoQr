@@ -26,7 +26,7 @@ class PermisoRepository implements RepositoryBorradoSuave {
         return $permiso;
     }
 
-    function consultarPorId(int $id): Model
+    function consultarPorId(int $id): Model | null
     {
         return Permiso::find($id);
     }
@@ -47,12 +47,12 @@ class PermisoRepository implements RepositoryBorradoSuave {
         return Permiso::onlyTrashed()->get();
     }
 
-    function consultarPorIdEnLaPapelera($id): Model
+    function consultarPorIdEnLaPapelera($id): Model | null
     {
         return Permiso::onlyTrashed()->find($id);
     }
 
-    function recuperarDeLaPapeleraPorId(int $id): Model
+    function recuperarDeLaPapeleraPorId(int $id): Model | null
     {
         Permiso::onlyTrashed()->find($id)->restore();
         return $this->consultarPorId($id);

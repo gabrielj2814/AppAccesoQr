@@ -19,6 +19,8 @@ class Puerta extends Model
     protected $fillable = [
         'nombre',
         'codigo',
+        'entrada',
+        'salida',
         'status',
         'zona_id',
     ];
@@ -30,6 +32,8 @@ class Puerta extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'entrada' => 'boolean',
+        'salida' => 'boolean',
         'status' => 'boolean',
         'zona_id' => 'integer',
     ];

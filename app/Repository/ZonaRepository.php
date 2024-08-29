@@ -33,7 +33,7 @@ class ZonaRepository implements RepositoryBorradoSuave{
         return $zona;
     }
 
-    function consultarPorId(int $id): Model
+    function consultarPorId(int $id): Model | null
     {
         return Zona::find($id);
     }
@@ -54,12 +54,12 @@ class ZonaRepository implements RepositoryBorradoSuave{
         return Zona::onlyTrashed()->get();
     }
 
-    function consultarPorIdEnLaPapelera($id): Model
+    function consultarPorIdEnLaPapelera($id): Model | null
     {
         return Zona::onlyTrashed()->find($id);
     }
 
-    function recuperarDeLaPapeleraPorId(int $id): Model
+    function recuperarDeLaPapeleraPorId(int $id): Model | null
     {
         Zona::onlyTrashed()->find($id)->restore();
         return $this->consultarPorId($id);

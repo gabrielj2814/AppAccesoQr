@@ -4,6 +4,7 @@ namespace App\Filament\Resources\ZonaResource\RelationManagers;
 
 use App\Filament\Resources\ZonaResource;
 use Filament\Forms;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Placeholder;
@@ -25,20 +26,20 @@ class PuertasRelationManager extends RelationManager
     {
         // numero_puertas
 
-        $puertas = $this->ownerRecord->puertas;
-        $numeroPuertas = (int)$this->ownerRecord->numero_puertas;
-         // Verifica si ya se alcanzó el límite de puertas
-         if (count($puertas) >= $numeroPuertas) {
-            // Mostrar notificación si la condición no se cumple
-            Notification::make()
-                ->title('Acceso Denegado')
-                ->body('Esta zona ya tiene todas las puertas asignadas.')
-                ->warning()
-                ->send();
+        // $puertas = $this->ownerRecord->puertas;
+        // $numeroPuertas = (int)$this->ownerRecord->numero_puertas;
+        //  // Verifica si ya se alcanzó el límite de puertas
+        //  if (count($puertas) >= $numeroPuertas) {
+        //     // Mostrar notificación si la condición no se cumple
+        //     Notification::make()
+        //         ->title('Acceso Denegado')
+        //         ->body('Esta zona ya tiene todas las puertas asignadas.')
+        //         ->warning()
+        //         ->send();
 
-            // Redirigir al índice del recurso o a la página de edición
-            redirect(ZonaResource::getUrl('edit', ['record' => $this->ownerRecord->getKey()]));
-        }
+        //     // Redirigir al índice del recurso o a la página de edición
+        //     redirect(ZonaResource::getUrl('edit', ['record' => $this->ownerRecord->getKey()]));
+        // }
 
         return $form
             ->schema([
@@ -54,11 +55,17 @@ class PuertasRelationManager extends RelationManager
                     ->label("Zona: ".$this->ownerRecord->nombre),
                     Hidden::make("id_zona")->default($this->ownerRecord->id),
                     TextInput::make('nombre')
-                        ->required()
-                        ->maxLength(255),
+                    ->required()
+                    ->maxLength(255),
                     TextInput::make('codigo')
-                        ->required()
-                        ->maxLength(255),
+                    ->required()
+                    ->maxLength(255),
+                    Checkbox::make('entrada')
+                        ->default(true)
+                        ->required(),
+                    Checkbox::make('salida')
+                        ->default(true)
+                        ->required(),
                 ]),
 
             ]);

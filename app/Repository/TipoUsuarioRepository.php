@@ -26,7 +26,7 @@ class TipoUsuarioRepository implements RepositoryBorradoSuave {
         return $tipoUsuario;
     }
 
-    function consultarPorId(int $id): Model
+    function consultarPorId(int $id): Model | null
     {
         return TipoUsuario::find($id);
     }
@@ -47,12 +47,12 @@ class TipoUsuarioRepository implements RepositoryBorradoSuave {
         return TipoUsuario::onlyTrashed()->get();
     }
 
-    function consultarPorIdEnLaPapelera($id): Model
+    function consultarPorIdEnLaPapelera($id): Model | null
     {
         return TipoUsuario::onlyTrashed()->find($id);
     }
 
-    function recuperarDeLaPapeleraPorId(int $id): Model
+    function recuperarDeLaPapeleraPorId(int $id): Model | null
     {
         TipoUsuario::onlyTrashed()->find($id)->restore();
         return $this->consultarPorId($id);

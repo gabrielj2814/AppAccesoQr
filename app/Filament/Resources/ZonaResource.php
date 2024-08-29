@@ -39,6 +39,7 @@ class ZonaResource extends Resource
         return $table
             ->columns([
                 //
+                TextColumn::make("id")->label("Codigo"),
                 TextColumn::make("nombre")->label("Nombre"),
                 TextColumn::make("numero_puertas")->label("Numero de Puertas"),
                 TextColumn::make("horario_de_acceso_de_la_zona")->label("Hora Acceso"),

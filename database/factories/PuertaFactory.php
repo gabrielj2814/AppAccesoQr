@@ -24,6 +24,8 @@ class PuertaFactory extends Factory
         return [
             'nombre' => $this->faker->regexify('[A-Za-z0-9]{255}'),
             'codigo' => $this->faker->regexify('[A-Za-z0-9]{255}'),
+            'entrada' => $this->faker->boolean(),
+            'salida' => $this->faker->boolean(),
             'status' => $this->faker->boolean(),
             'zona_id' => Zona::factory(),
         ];

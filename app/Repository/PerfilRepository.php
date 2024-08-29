@@ -20,13 +20,18 @@ class PerfilRepository implements RepositoryBorradoSuave{
     function actualizar(array $datos): Model
     {
         $perfil= $this->consultarPorId($datos["id_perfil"]);
-        $perfil->nombre=$datos["nombre"];
-        $perfil->status=$datos["status"];
-        $perfil->save();
-        return $perfil;
+        if($perfil){
+            $perfil->nombre=$datos["nombre"];
+            $perfil->status=$datos["status"];
+            $perfil->save();
+            return $perfil;
+        }
+        else{
+            return null;
+        }
     }
 
-    function consultarPorId(int $id): Model
+    function consultarPorId(int $id): Model | null
     {
         return Perfil::find($id);
     }
@@ -47,12 +52,12 @@ class PerfilRepository implements RepositoryBorradoSuave{
         return Perfil::onlyTrashed()->get();
     }
 
-    function consultarPorIdEnLaPapelera($id): Model
+    function consultarPorIdEnLaPapelera($id): Model | null
     {
         return Perfil::onlyTrashed()->find($id);
     }
 
-    function recuperarDeLaPapeleraPorId(int $id): Model
+    function recuperarDeLaPapeleraPorId(int $id): Model | null
     {
         Perfil::onlyTrashed()->find($id)->restore();
         return $this->consultarPorId($id);

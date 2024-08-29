@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->date('fecha');
             $table->time('hora');
+            $table->string('lado', 10);
             $table->foreignId('qr_usuario_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('puerta_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

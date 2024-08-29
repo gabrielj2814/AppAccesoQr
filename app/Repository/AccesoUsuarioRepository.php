@@ -25,7 +25,7 @@ class AccesoUsuarioRepository implements RepositoryBorradoSuave {
         return $acceso;
     }
 
-    function consultarPorId(int $id): Model
+    function consultarPorId(int $id): Model | null
     {
         return AccesoUsuario::find($id);
     }
@@ -46,7 +46,7 @@ class AccesoUsuarioRepository implements RepositoryBorradoSuave {
         return AccesoUsuario::onlyTrashed()->get();
     }
 
-    function consultarPorIdEnLaPapelera($id): Model
+    function consultarPorIdEnLaPapelera($id): Model | null
     {
         return AccesoUsuario::onlyTrashed()->find($id);
     }

@@ -57,7 +57,7 @@ class UsuarioRepository implements RepositoryBorradoSuave{
         $usuario->save();
     }
 
-    function consultarPorId(int $id): Model
+    function consultarPorId(int $id): Model | null
     {
         return User::find($id);
     }
@@ -78,12 +78,12 @@ class UsuarioRepository implements RepositoryBorradoSuave{
         return User::onlyTrashed()->get();
     }
 
-    function consultarPorIdEnLaPapelera($id): Model
+    function consultarPorIdEnLaPapelera($id): Model | null
     {
         return User::onlyTrashed()->find($id);
     }
 
-    function recuperarDeLaPapeleraPorId(int $id): Model
+    function recuperarDeLaPapeleraPorId(int $id): Model | null
     {
         User::onlyTrashed()->find($id)->restore();
         return $this->consultarPorId($id);

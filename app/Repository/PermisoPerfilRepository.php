@@ -47,12 +47,12 @@ class PermisoPerfilRepository implements RepositoryBorradoSuave {
         return PermisoPerfil::onlyTrashed()->get();
     }
 
-    function consultarPorIdEnLaPapelera($id): Model
+    function consultarPorIdEnLaPapelera($id): Model | null
     {
         return PermisoPerfil::onlyTrashed()->find($id);
     }
 
-    function recuperarDeLaPapeleraPorId(int $id): Model
+    function recuperarDeLaPapeleraPorId(int $id): Model | null
     {
         PermisoPerfil::onlyTrashed()->find($id)->restore();
         return $this->consultarPorId($id);

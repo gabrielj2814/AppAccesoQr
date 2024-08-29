@@ -42,7 +42,7 @@ class QrUsuarioRepository implements RepositoryBorradoSuave{
         return $QrUsuario;
     }
 
-    function consultarPorId(int $id): Model
+    function consultarPorId(int $id): Model | null
     {
         return QrUsuario::find($id);
     }
@@ -63,12 +63,12 @@ class QrUsuarioRepository implements RepositoryBorradoSuave{
         return QrUsuario::onlyTrashed()->get();
     }
 
-    function consultarPorIdEnLaPapelera($id): Model
+    function consultarPorIdEnLaPapelera($id): Model | null
     {
         return QrUsuario::onlyTrashed()->find($id);
     }
 
-    function recuperarDeLaPapeleraPorId(int $id): Model
+    function recuperarDeLaPapeleraPorId(int $id): Model | null
     {
         QrUsuario::onlyTrashed()->find($id)->restore();
         return $this->consultarPorId($id);

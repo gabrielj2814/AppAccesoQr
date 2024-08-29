@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 interface RepositoryBorradoSuave extends Repository {
 
-    public function recuperarDeLaPapeleraPorId(int $id): Model;
+    public function recuperarDeLaPapeleraPorId(int $id): Model | null;
 
     public function eliminarDeLaPapelera(int $id): void;
 
     public function consultarTodoDeLaPapelera(): Collection;
 
-    public function consultarPorIdEnLaPapelera(int $id): Model;
+    public function consultarPorIdEnLaPapelera(int $id): Model | null;
 
 }
 
