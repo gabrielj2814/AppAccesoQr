@@ -31,7 +31,6 @@ models:
 
   Zona:
     nombre: string:255
-    numero_puertas: integer default:1
     horario_de_acceso_de_la_zona: time nullable
     horario_de_cierre_de_la_zona: time nullable
     status: boolean default:1
@@ -58,6 +57,7 @@ models:
     timestamps
 
   LogAcceso:
+    mensaje: string:255
     fecha: Date
     hora: Time
     lado: string:10

@@ -79,7 +79,7 @@ class QrUsuarioRepository implements RepositoryBorradoSuave{
         QrUsuario::onlyTrashed()->find($id)->forceDelete();
     }
 
-    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection
+    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection|null
     {
         return QrUsuario::where($campo, $condicion, $datoHaBuscar)->get();
     }

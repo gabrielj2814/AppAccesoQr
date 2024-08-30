@@ -24,6 +24,7 @@ class LogAccesoFactory extends Factory
     public function definition(): array
     {
         return [
+            'mensaje' => $this->faker->regexify('[A-Za-z0-9]{255}'),
             'fecha' => $this->faker->date(),
             'hora' => $this->faker->time(),
             'lado' => $this->faker->regexify('[A-Za-z0-9]{10}'),

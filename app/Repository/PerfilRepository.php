@@ -68,7 +68,7 @@ class PerfilRepository implements RepositoryBorradoSuave{
         Perfil::onlyTrashed()->find($id)->forceDelete();
     }
 
-    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection
+    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection|null
     {
         return Perfil::where($campo, $condicion, $datoHaBuscar)->get();
     }

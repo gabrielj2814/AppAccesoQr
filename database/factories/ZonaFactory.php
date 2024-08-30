@@ -22,7 +22,6 @@ class ZonaFactory extends Factory
     {
         return [
             'nombre' => $this->faker->regexify('[A-Za-z0-9]{255}'),
-            'numero_puertas' => $this->faker->numberBetween(-10000, 10000),
             'horario_de_acceso_de_la_zona' => $this->faker->time(),
             'horario_de_cierre_de_la_zona' => $this->faker->time(),
             'status' => $this->faker->boolean(),

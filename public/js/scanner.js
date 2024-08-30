@@ -27,9 +27,11 @@ Instascan.Camera.getCameras().then(function (cameras){
         // });
 
         if(cameras.indexOf("1")==0){
+            // camara frontal
             scanner.start(cameras[1]);
         }
         else{
+            // camara tracera
             scanner.start(cameras[1]);
         }
     }else{
@@ -51,9 +53,10 @@ function validarAcceso(token){
     axios.post(`/api/v1/valiadar-acceso/${id_zona}/${codigo_puerta}/${lado}`,DATA)
     .then(respuesta => {
         console.log("respuesta servidor => ",respuesta)
-        // alert(JSON.stringify(respuesta))
-        alert(JSON.stringify(respuesta))
-        // document.getElementById("dataJson").textContent=JSON.stringify(respuesta)
+
+        alert(JSON.stringify(respuesta.data))
+        document.getElementById("dataJson").textContent=JSON.stringify(respuesta.data)
+
     })
     .catch(error => {
         console.error("error servidor => ",error)

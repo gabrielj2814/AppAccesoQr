@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Repository;
+
 use App\Contracts\RepositoryBorradoSuave;
 use App\Models\AccesoUsuario;
 use Illuminate\Database\Eloquent\Collection;
@@ -62,9 +64,14 @@ class AccesoUsuarioRepository implements RepositoryBorradoSuave {
         AccesoUsuario::onlyTrashed()->find($id)->forceDelete();
     }
 
-    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection
+    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection|null
     {
         return AccesoUsuario::where($campo, $condicion, $datoHaBuscar)->get();
+    }
+
+    function consultarPorIdZonaYIdUser(string $zona_id,string $user_id): Model|null
+    {
+        return AccesoUsuario::where("zona_id","=",$zona_id)->where("user_id","=",$user_id)->first();
     }
 
 

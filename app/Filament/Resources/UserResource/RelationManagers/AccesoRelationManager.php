@@ -84,7 +84,6 @@ class AccesoRelationManager extends RelationManager
             ->recordTitleAttribute('Acceso')
             ->columns([
                 Tables\Columns\TextColumn::make('zona.nombre')->label("Zona"),
-                Tables\Columns\TextColumn::make('zona.numero_puertas')->label("Puertas"),
             ])
             ->filters([
                 //
@@ -94,6 +93,7 @@ class AccesoRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
+                Tables\Actions\RestoreAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

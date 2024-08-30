@@ -2,7 +2,6 @@
 
 namespace App\Filament\Pages;
 
-use AccesoUsuarioRepository;
 use App\Repository\QrUsuarioRepository;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;

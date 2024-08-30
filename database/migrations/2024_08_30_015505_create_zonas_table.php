@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('puertas', function (Blueprint $table) {
+        Schema::create('zonas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 255);
-            $table->string('codigo', 255);
-            $table->boolean('entrada')->default(1);
-            $table->boolean('salida')->default(1);
+            $table->time('horario_de_acceso_de_la_zona')->nullable();
+            $table->time('horario_de_cierre_de_la_zona')->nullable();
             $table->boolean('status')->default(1);
-            $table->foreignId('zona_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('puertas');
+        Schema::dropIfExists('zonas');
     }
 };

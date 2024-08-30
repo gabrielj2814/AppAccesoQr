@@ -16,6 +16,7 @@ class LogAcceso extends Model
      * @var array
      */
     protected $fillable = [
+        'mensaje',
         'fecha',
         'hora',
         'lado',

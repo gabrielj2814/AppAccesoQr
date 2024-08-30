@@ -17,7 +17,7 @@ interface Repository {
 
     public function consultarPorId(int $id): Model | null;
 
-    public function consultarPorUnCampo(string $campo, string $condicion , $datoHaBuscar): Model | Collection;
+    public function consultarPorUnCampo(string $campo, string $condicion , $datoHaBuscar): Model | Collection | null;
 
 }
 

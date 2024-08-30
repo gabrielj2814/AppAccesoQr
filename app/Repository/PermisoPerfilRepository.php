@@ -63,7 +63,7 @@ class PermisoPerfilRepository implements RepositoryBorradoSuave {
         PermisoPerfil::onlyTrashed()->find($id)->forceDelete();
     }
 
-    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection
+    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection|null
     {
         return PermisoPerfil::where($campo, $condicion, $datoHaBuscar)->get();
     }

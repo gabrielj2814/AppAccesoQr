@@ -71,7 +71,7 @@ class PuertaRepository implements RepositoryBorradoSuave{
         Puerta::onlyTrashed()->find($id)->forceDelete();
     }
 
-    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection
+    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection|null
     {
         return Puerta::where($campo, $condicion, $datoHaBuscar)->get();
     }

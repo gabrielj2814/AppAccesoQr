@@ -94,7 +94,7 @@ class UsuarioRepository implements RepositoryBorradoSuave{
         User::onlyTrashed()->find($id)->forceDelete();
     }
 
-    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection
+    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection|null
     {
         return User::where($campo, $condicion, $datoHaBuscar)->get();
     }

@@ -15,6 +15,7 @@ return new class extends Migration
 
         Schema::create('log_accesos', function (Blueprint $table) {
             $table->id();
+            $table->string('mensaje', 255);
             $table->date('fecha');
             $table->time('hora');
             $table->string('lado', 10);

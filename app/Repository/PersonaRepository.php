@@ -65,7 +65,7 @@ class PersonaRepository implements RepositoryBorradoSuave {
         Persona::onlyTrashed()->find($id)->forceDelete();
     }
 
-    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection
+    function consultarPorUnCampo(string $campo, string $condicion, $datoHaBuscar): Model|Collection|null
     {
         return Persona::where($campo, $condicion, $datoHaBuscar)->get();
     }

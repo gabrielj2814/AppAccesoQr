@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\EscanerQrEvent;
+use App\Repository\AccesoUsuarioRepository;
 use App\Repository\PuertaRepository;
+use App\Repository\QrUsuarioRepository;
 use App\Repository\ZonaRepository;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -16,6 +19,8 @@ class ScannerController extends Controller
     function __construct(
 
        public ZonaRepository $ZonaRepository,
+       public AccesoUsuarioRepository $AccesoUsuarioRepository,
+       public QrUsuarioRepository $QrUsuarioRepository,
        public PuertaRepository $PuertaRepository,
     ){}
 
@@ -70,9 +75,6 @@ class ScannerController extends Controller
             return new JsonResponse($respuestaServidor);
         }
 
-
-
-
         return view("scaner.index",[
             "id_zona" => $id_zona,
             "codigo_puerta" => $codigo_puerta,
@@ -93,13 +95,131 @@ class ScannerController extends Controller
         $token=$request->token;
         $key=env("JWT_KEY");
 
-        $decoded = JWT::decode($token, new Key($key, 'HS256'));
+        try {
+            $acceso=false;
+            $dataToken = JWT::decode($token, new Key($key, 'HS256'));
+            $puerta=$this->PuertaRepository->consultarPorUnCampo("codigo","=",$codigo_puerta);
 
-        $respuestaServidor["status_code"]=200;
-        $respuestaServidor["data"]=$decoded;
-        $respuestaServidor["mensaje"]="ok";
+            $validaraToken=$this->QrUsuarioRepository->consultarPorUnCampo("token_qr","=",$token);
 
-        return new JsonResponse($respuestaServidor);
+            if(count($validaraToken)==0){
+                $data=[
+                    "mensaje" => "el qr del usuario no a sido encontrado",
+                    "id_zona" => $id_zona,
+                    "lado" => $lado,
+                    "qr" => $validaraToken[0],
+                    "puerta" => $puerta[0],
+                    "user_id" => $dataToken->id_usuario,
+                ];
+
+                EscanerQrEvent::dispatch($data);
+
+                $respuestaServidor["status_code"]=400;
+                $respuestaServidor["data"]=$acceso;
+                $respuestaServidor["mensaje"]="Error: el qr no asido encontrado";
+                return new JsonResponse($respuestaServidor);
+            }
+
+            if($validaraToken[0]->status==0){
+
+                $data=[
+                    "mensaje" => "el qr del usuario no se le dio acceso por que esta de baja",
+                    "id_zona" => $id_zona,
+                    "lado" => $lado,
+                    "qr" => $validaraToken[0],
+                    "puerta" => $puerta[0],
+                    "user_id" => $dataToken->id_usuario,
+                ];
+
+                EscanerQrEvent::dispatch($data);
+
+                $respuestaServidor["status_code"]=400;
+                $respuestaServidor["data"]=$acceso;
+                $respuestaServidor["mensaje"]="Error: el qr esta de baja";
+                return new JsonResponse($respuestaServidor);
+            }
+
+            $accessoZona=$this->AccesoUsuarioRepository->consultarPorIdZonaYIdUser($id_zona,$dataToken->id_usuario);
+
+            if(!$accessoZona){
+
+                $data=[
+                    "mensaje" => "el usuario no tiene acceso por que no la tiene asignada",
+                    "id_zona" => $id_zona,
+                    "lado" => $lado,
+                    "qr" => $validaraToken[0],
+                    "puerta" => $puerta[0],
+                    "user_id" => $dataToken->id_usuario,
+                ];
+
+                EscanerQrEvent::dispatch($data);
+
+                $respuestaServidor["status_code"]=400;
+                $respuestaServidor["data"]=$acceso;
+                $respuestaServidor["mensaje"]="Error: el usuario no tiene acceso a la zona por que no la tiene asignada";
+                return new JsonResponse($respuestaServidor);
+            }
+
+
+            for ($index=0; $index < count($dataToken->zonas); $index++) {
+                $zonaDelQR=$dataToken->zonas[$index];
+                if($zonaDelQR==$accessoZona->id){
+                    $acceso=true;
+                    break;
+                }
+            }
+
+            if(!$acceso){
+
+                $data=[
+                    "mensaje" => "se le nego el acceso por que no tiene acceso a la zona",
+                    "id_zona" => $id_zona,
+                    "lado" => $lado,
+                    "qr" => $validaraToken[0],
+                    "puerta" => $puerta[0],
+                    "user_id" => $dataToken->id_usuario,
+                ];
+
+                EscanerQrEvent::dispatch($data);
+
+                $respuestaServidor["status_code"]=400;
+                $respuestaServidor["data"]=$acceso;
+                $respuestaServidor["mensaje"]="Error: el usuario no tiene acceso a la zona";
+                return new JsonResponse($respuestaServidor);
+            }
+
+            $respuestaServidor["status_code"]=200;
+            $respuestaServidor["data"]=$acceso;
+            $respuestaServidor["mensaje"]="Acceso permitido";
+
+
+
+            $data=[
+                "mensaje" => "se le dio acceso",
+                "id_zona" => $id_zona,
+                "lado" => $lado,
+                "qr" => $validaraToken[0],
+                "puerta" => $puerta[0],
+                "user_id" => $dataToken->id_usuario,
+            ];
+
+            EscanerQrEvent::dispatch($data);
+
+            return new JsonResponse($respuestaServidor);
+
+        } catch (\Throwable $th) {
+
+            $respuestaServidor["status_code"]=500;
+            $respuestaServidor["mensaje"]="Error al decifrar el token sssss";
+
+            return new JsonResponse($respuestaServidor);
+        }
+
+
+
+
+
+
 
     }
 

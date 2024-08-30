@@ -41,7 +41,6 @@ class ZonaResource extends Resource
                 //
                 TextColumn::make("id")->label("Codigo"),
                 TextColumn::make("nombre")->label("Nombre"),
-                TextColumn::make("numero_puertas")->label("Numero de Puertas"),
                 TextColumn::make("horario_de_acceso_de_la_zona")->label("Hora Acceso"),
                 TextColumn::make("horario_de_cierre_de_la_zona")->label("Hora Cierre"),
             ])
@@ -52,6 +51,7 @@ class ZonaResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
