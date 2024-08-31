@@ -6,7 +6,6 @@
   - [ ] cuando se haga un scaneo le mostrar una modal con la informacion del que quiere entrar y la zona a la que quiere acceder y si quiere salir o entrar en la pantalla monitor 
 - [ ] mejorar visualmente la pantalla de monitor
 
-- [ ] hacer que el codigo de la puerta sea unico
 - [ ] Mejorar el disenó de la vista perfil
 - [ ] hacer que los permisos sean funcionales
 - [ ] solo permitir el acceso dentre la hora de entra y salida 
