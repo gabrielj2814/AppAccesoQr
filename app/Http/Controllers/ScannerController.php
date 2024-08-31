@@ -6,6 +6,7 @@ use App\Events\EscanerQrEvent;
 use App\Repository\AccesoUsuarioRepository;
 use App\Repository\PuertaRepository;
 use App\Repository\QrUsuarioRepository;
+use App\Repository\UsuarioRepository;
 use App\Repository\ZonaRepository;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -18,6 +19,7 @@ class ScannerController extends Controller
 
     function __construct(
 
+       public UsuarioRepository $UsuarioRepository,
        public ZonaRepository $ZonaRepository,
        public AccesoUsuarioRepository $AccesoUsuarioRepository,
        public QrUsuarioRepository $QrUsuarioRepository,
@@ -101,6 +103,7 @@ class ScannerController extends Controller
             $puerta=$this->PuertaRepository->consultarPorUnCampo("codigo","=",$codigo_puerta);
 
             $validaraToken=$this->QrUsuarioRepository->consultarPorUnCampo("token_qr","=",$token);
+            $usuario=$this->UsuarioRepository->consultarPorId($dataToken->id_usuario);
 
             if(count($validaraToken)==0){
                 $data=[
@@ -115,8 +118,10 @@ class ScannerController extends Controller
                 EscanerQrEvent::dispatch($data);
 
                 $respuestaServidor["status_code"]=400;
-                $respuestaServidor["data"]=$acceso;
-                $respuestaServidor["mensaje"]="Error: el qr no asido encontrado";
+                $respuestaServidor["data"]=[
+                    "acceso" => $acceso,
+                ];
+                $respuestaServidor["mensaje"]="el qr no asido encontrado";
                 return new JsonResponse($respuestaServidor);
             }
 
@@ -134,8 +139,10 @@ class ScannerController extends Controller
                 EscanerQrEvent::dispatch($data);
 
                 $respuestaServidor["status_code"]=400;
-                $respuestaServidor["data"]=$acceso;
-                $respuestaServidor["mensaje"]="Error: el qr esta de baja";
+                $respuestaServidor["data"]=[
+                    "acceso" => $acceso,
+                ];
+                $respuestaServidor["mensaje"]="el qr esta de baja";
                 return new JsonResponse($respuestaServidor);
             }
 
@@ -155,8 +162,10 @@ class ScannerController extends Controller
                 EscanerQrEvent::dispatch($data);
 
                 $respuestaServidor["status_code"]=400;
-                $respuestaServidor["data"]=$acceso;
-                $respuestaServidor["mensaje"]="Error: el usuario no tiene acceso a la zona por que no la tiene asignada";
+                $respuestaServidor["data"]=[
+                    "acceso" => $acceso,
+                ];
+                $respuestaServidor["mensaje"]="el usuario no tiene acceso a la zona por que no la tiene asignada";
                 return new JsonResponse($respuestaServidor);
             }
 
@@ -183,14 +192,14 @@ class ScannerController extends Controller
                 EscanerQrEvent::dispatch($data);
 
                 $respuestaServidor["status_code"]=400;
-                $respuestaServidor["data"]=$acceso;
-                $respuestaServidor["mensaje"]="Error: el usuario no tiene acceso a la zona";
+                $respuestaServidor["data"]=[
+                    "acceso" => $acceso,
+                ];
+                $respuestaServidor["mensaje"]="el usuario no tiene acceso a la zona";
                 return new JsonResponse($respuestaServidor);
             }
 
-            $respuestaServidor["status_code"]=200;
-            $respuestaServidor["data"]=$acceso;
-            $respuestaServidor["mensaje"]="Acceso permitido";
+
 
 
 
@@ -204,6 +213,15 @@ class ScannerController extends Controller
             ];
 
             EscanerQrEvent::dispatch($data);
+
+            $usuario->persona;
+
+            $respuestaServidor["status_code"]=200;
+            $respuestaServidor["data"]=[
+                "acceso" => $acceso,
+                "usuario" => $usuario,
+            ];
+            $respuestaServidor["mensaje"]="Acceso permitido";
 
             return new JsonResponse($respuestaServidor);
 

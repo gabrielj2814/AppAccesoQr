@@ -15,8 +15,8 @@ return new class extends Migration
 
         Schema::create('qr_usuarios', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid', 255);
-            $table->string('token_qr', 255);
+            $table->string('uuid', 255)->unique();
+            $table->string('token_qr', 255)->unique();
             $table->boolean('se_puede_vencer')->default(0);
             $table->date('fecha_vencimiento')->nullable();
             $table->boolean('status')->default(1);

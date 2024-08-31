@@ -45,21 +45,49 @@ Instascan.Camera.getCameras().then(function (cameras){
 
 
 function validarAcceso(token){
-    // alert(token)
+    document.getElementById("contenedorLoader").style.display="flex";
     const DATA={
         token:token
     }
 
     axios.post(`/api/v1/valiadar-acceso/${id_zona}/${codigo_puerta}/${lado}`,DATA)
     .then(respuesta => {
+        document.getElementById("contenedorLoader").style.display="none";
+        document.getElementById("mensajeError").textContent="";
         console.log("respuesta servidor => ",respuesta)
-
-        alert(JSON.stringify(respuesta.data))
-        document.getElementById("dataJson").textContent=JSON.stringify(respuesta.data)
+        let {data,mensaje} = respuesta.data
+        if(data.acceso==true){
+            document.getElementById("islaNotificaciones").style.border="1px solid green"
+            document.getElementById("scanner-ok").style.display="block"
+            document.getElementById("scanner-error").style.display="none"
+            document.getElementById("nombre").textContent=`${data.usuario.persona.nombre} ${data.usuario.persona.apellido}`
+            document.getElementById("email").textContent=`${data.usuario.email}`
+        }
+        else{
+            document.getElementById("islaNotificaciones").style.border="1px solid red"
+            document.getElementById("scanner-ok").style.display="none"
+            document.getElementById("scanner-error").style.display="block"
+            document.getElementById("mensajeError").textContent=`Error: ${mensaje}`
+        }
+        setTimeout(()=>{
+            document.getElementById("scanner-ok").style.display="none"
+            document.getElementById("scanner-error").style.display="none"
+            document.getElementById("islaNotificaciones").style.border="1px solid #fff"
+        },10000)
 
     })
     .catch(error => {
+        document.getElementById("contenedorLoader").style.display="none";
         console.error("error servidor => ",error)
         alert(JSON.stringify(error))
+        document.getElementById("scanner-ok").style.display="none"
+        document.getElementById("scanner-error").style.display="block"
+        document.getElementById("mensajeError").textContent="Error con el servidor";
+        document.getElementById("islaNotificaciones").style.border="1px solid red"
+        setTimeout(()=>{
+            document.getElementById("scanner-ok").style.display="none"
+            document.getElementById("scanner-error").style.display="none"
+            document.getElementById("islaNotificaciones").style.border="1px solid #fff"
+        },10000)
     })
 }

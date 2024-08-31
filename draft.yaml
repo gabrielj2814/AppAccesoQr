@@ -3,8 +3,8 @@
 models:
 
   QrUsuario:
-    uuid: string:255
-    token_qr: string:255
+    uuid: string:255 unique
+    token_qr: string:255 unique
     se_puede_vencer: boolean default:0
     fecha_vencimiento: date nullable
     status: boolean default:1

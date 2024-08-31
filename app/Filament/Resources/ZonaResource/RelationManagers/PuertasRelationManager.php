@@ -59,6 +59,7 @@ class PuertasRelationManager extends RelationManager
                     ->maxLength(255),
                     TextInput::make('codigo')
                     ->required()
+                    ->unique()
                     ->maxLength(255),
                     Checkbox::make('entrada')
                         ->default(true)
