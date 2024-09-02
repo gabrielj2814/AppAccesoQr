@@ -62,11 +62,9 @@ class PuertasRelationManager extends RelationManager
                     ->unique()
                     ->maxLength(255),
                     Checkbox::make('entrada')
-                        ->default(true)
-                        ->required(),
+                        ->default(true),
                     Checkbox::make('salida')
-                        ->default(true)
-                        ->required(),
+                        ->default(true),
                 ]),
 
             ]);

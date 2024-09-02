@@ -12,6 +12,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -47,7 +48,11 @@ class UserResource extends Resource
                 TextColumn::make("persona.apellido")->label("Apellido"),
                 TextColumn::make("perfil.nombre")->label("Perfil"),
                 TextColumn::make("tipoUsuario.nombre")->label("Tipo de Usuario"),
-                TextColumn::make("email")->label("Correo")
+                TextColumn::make("email")->label("Correo"),
+                IconColumn::make("status")->boolean(),
+                // TextColumn::make("status")->formatStateUsing(function ($state) {
+                //     return $state ? 'Activo' : 'Inactivo';
+                // }),
             ])
             ->filters([
                 //
