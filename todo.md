@@ -1,6 +1,4 @@
 
-- [ ] solo permitir el acceso dentre la hora de entra y salida
-- [ ] siempre dejar salir apesar de que la hora actual supere la hora de salida de la zona
 - [ ] al cargar la pagina de perfil si el ultimo qr esta de baja generar otro activo
 - [ ] Mejorar el disenó de la vista perfil
 - [ ] remover el campo status de la tabla usuario
