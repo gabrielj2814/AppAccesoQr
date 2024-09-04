@@ -79,6 +79,7 @@ function validarAcceso(token){
     .catch(error => {
         document.getElementById("contenedorLoader").style.display="none";
         console.error("error servidor => ",error)
+        alert("error")
         alert(JSON.stringify(error))
         document.getElementById("scanner-ok").style.display="none"
         document.getElementById("scanner-error").style.display="block"

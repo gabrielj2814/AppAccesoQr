@@ -8,6 +8,9 @@ use App\Repository\PuertaRepository;
 use App\Repository\QrUsuarioRepository;
 use App\Repository\UsuarioRepository;
 use App\Repository\ZonaRepository;
+use DateTime;
+use DateTimeZone;
+use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Http\JsonResponse;
@@ -105,6 +108,15 @@ class ScannerController extends Controller
             $validaraToken=$this->QrUsuarioRepository->consultarPorUnCampo("token_qr","=",$token);
             $usuario=$this->UsuarioRepository->consultarPorId($dataToken->id_usuario);
 
+            if(!$usuario){
+                $respuestaServidor["status_code"]=400;
+                $respuestaServidor["data"]=[
+                    "acceso" => $acceso,
+                ];
+                $respuestaServidor["mensaje"]="se le a denegado el acceso por que no se a encontrado el usuario";
+                return new JsonResponse($respuestaServidor);
+            }
+
             if(count($validaraToken)==0){
                 $data=[
                     "mensaje" => "el qr del usuario no a sido encontrado",
@@ -199,31 +211,97 @@ class ScannerController extends Controller
                 return new JsonResponse($respuestaServidor);
             }
 
+            $zonaHoraria = new DateTimeZone('America/Caracas');
+            $ahora=new DateTime("now",$zonaHoraria);
+            $data=[];
+
+            if($lado=="entrada"){
 
 
+                if(
+                    $this->compararHorasMenorIgual($ahora->format("H:i:s"),$accessoZona->zona->horario_de_cierre_de_la_zona) &&
+                    $this->compararHorasMayorIgual($ahora->format("H:i:s"),$accessoZona->zona->horario_de_acceso_de_la_zona)
+                ){
+                    $data=[
+                        "mensaje" => "Acceso consedido",
+                        "id_zona" => $id_zona,
+                        "lado" => $lado,
+                        "qr" => $validaraToken[0],
+                        "puerta" => $puerta[0],
+                        "user_id" => $dataToken->id_usuario,
+                    ];
+
+                    EscanerQrEvent::dispatch($data);
 
 
-            $data=[
-                "mensaje" => "se le dio acceso",
-                "id_zona" => $id_zona,
-                "lado" => $lado,
-                "qr" => $validaraToken[0],
-                "puerta" => $puerta[0],
-                "user_id" => $dataToken->id_usuario,
-            ];
+                    $usuario->persona;
 
-            EscanerQrEvent::dispatch($data);
+                    $respuestaServidor["status_code"]=200;
+                    $respuestaServidor["data"]=[
+                        "acceso" => $acceso,
+                        "usuario" => $usuario,
+                    ];
 
-            $usuario->persona;
+                    $respuestaServidor["mensaje"]="Acceso consedido";
 
-            $respuestaServidor["status_code"]=200;
-            $respuestaServidor["data"]=[
-                "acceso" => $acceso,
-                "usuario" => $usuario,
-            ];
-            $respuestaServidor["mensaje"]="Acceso permitido";
+                    return new JsonResponse($respuestaServidor);
 
-            return new JsonResponse($respuestaServidor);
+                }
+                else{
+                    $acceso=false;
+                    $data=[
+                        "mensaje" => "Acceso denagado por no esta dentro del horario permitido",
+                        "id_zona" => $id_zona,
+                        "lado" => $lado,
+                        "qr" => $validaraToken[0],
+                        "puerta" => $puerta[0],
+                        "user_id" => $dataToken->id_usuario,
+                    ];
+
+                    EscanerQrEvent::dispatch($data);
+
+
+                    $usuario->persona;
+
+                    $respuestaServidor["status_code"]=200;
+                    $respuestaServidor["data"]=[
+                        "acceso" => false,
+                        "usuario" => $usuario,
+                    ];
+
+                    $respuestaServidor["mensaje"]="Acceso denagado por no esta dentro del horario permitido";
+
+                    return new JsonResponse($respuestaServidor);
+
+                }
+
+            }
+            else if($lado=="salida"){
+                $data=[
+                    "mensaje" => "Acceso consedido",
+                    "id_zona" => $id_zona,
+                    "lado" => $lado,
+                    "qr" => $validaraToken[0],
+                    "puerta" => $puerta[0],
+                    "user_id" => $dataToken->id_usuario,
+                ];
+
+                EscanerQrEvent::dispatch($data);
+
+
+                $usuario->persona;
+
+                $respuestaServidor["status_code"]=200;
+                $respuestaServidor["data"]=[
+                    "acceso" => $acceso,
+                    "usuario" => $usuario,
+                ];
+
+                $respuestaServidor["mensaje"]="Acceso permitido";
+
+                return new JsonResponse($respuestaServidor);
+
+            }
 
         } catch (\Throwable $th) {
 
@@ -233,11 +311,27 @@ class ScannerController extends Controller
             return new JsonResponse($respuestaServidor);
         }
 
+    }
 
+    function compararHorasMenorIgual($hora1, $hora2){
 
+        $formato = 'H:i:s';
 
+        $dateTime1 = DateTime::createFromFormat($formato, $hora1);
+        $dateTime2 = DateTime::createFromFormat($formato, $hora2);
 
+        return $dateTime1 <= $dateTime2;
 
+    }
+
+    function compararHorasMayorIgual($hora1, $hora2){
+
+        $formato = 'H:i:s';
+
+        $dateTime1 = DateTime::createFromFormat($formato, $hora1);
+        $dateTime2 = DateTime::createFromFormat($formato, $hora2);
+
+        return $dateTime1 >= $dateTime2;
 
     }
 
