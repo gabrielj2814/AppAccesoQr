@@ -28,7 +28,7 @@ class PerfilUsuario extends Page
         return [
             Action::make("botonActualizarAccesoDelQR")
             ->label('Actualizar Acceso QR')
-            ->action('actualizarAccesoDelQR')
+            ->action('actualizarPaginaParaActualizarAccesoDelQR')
             ->color('primary')
             ->icon('heroicon-o-bell'),
         ];
@@ -48,22 +48,35 @@ class PerfilUsuario extends Page
         $qrAcceso=null;
         if(count($datos)>0){
             $qrAcceso=$datos[0];
+            if($qrAcceso->status==0){
+                $this->actualizarAccesoDelQR();
+                $datos2=$QrUsuarioRepository->consultarPorIdYOrdenarPor("user_id",$user->id,"created_at","DESC");
+                if(count($datos2)>0){
+                    $qrAcceso=$datos2[0];
+                }
+            }
         }
+        else{
+            $this->actualizarAccesoDelQR();
+            $datos=$QrUsuarioRepository->consultarPorIdYOrdenarPor("user_id",$user->id,"created_at","DESC");
+            if(count($datos)>0){
+                $qrAcceso=$datos[0];
+            }
+        }
+
+
         return [
             'user' => $user,
             'qrAcceso' => $qrAcceso,
         ];
     }
 
-    public function actualizarAccesoDelQR(): void
-    {
-
-        // ->body('Has hecho clic en el botón personalizado')
+    public function actualizarAccesoDelQR(){
 
         $user = Auth::user();
         $user->acceso;
-        if(count($user->acceso)>0){
 
+        if(count($user->acceso)>0){
             $key=env("JWT_KEY");
 
             $accesos=[];
@@ -90,6 +103,20 @@ class PerfilUsuario extends Page
 
             $QrUsuarioRepository= new QrUsuarioRepository();
             $QrUsuarioRepository->registrar($datos);
+        }
+
+    }
+
+    public function actualizarPaginaParaActualizarAccesoDelQR(): void
+    {
+
+        // ->body('Has hecho clic en el botón personalizado')
+
+        $user = Auth::user();
+        $user->acceso;
+        if(count($user->acceso)>0){
+
+            $this->actualizarAccesoDelQR();
 
             Notification::make("ok")
             ->title('Acceso del QR actualizado')
@@ -107,8 +134,6 @@ class PerfilUsuario extends Page
         }
 
         redirect(PerfilUsuario::getUrl());
-
-
 
     }
 

@@ -48,7 +48,6 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
-            $table->boolean('status');
             $table->unsignedBigInteger('id_perfil')->nullable();
             $table->foreign("id_perfil")->references("id_perfil")->on("perfil")->onUpdate("cascade")->onDelete("cascade");
             $table->unsignedBigInteger('id_persona');

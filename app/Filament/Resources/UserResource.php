@@ -38,6 +38,17 @@ class UserResource extends Resource
         ]);
     }
 
+    // // Modifica la consulta que obtiene los registros
+    // protected function getTableQuery()
+    // {
+    //     // Obtén el usuario autenticado
+    //     $usuarioAutenticado = Auth::user();
+
+    //     // Filtra los registros basados en una relación con el usuario autenticado
+    //     // Por ejemplo, si tienes una columna user_id en tu modelo
+    //     return parent::getTableQuery()->where('user_id', $usuarioAutenticado->id);
+    // }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -49,7 +60,7 @@ class UserResource extends Resource
                 TextColumn::make("perfil.nombre")->label("Perfil"),
                 TextColumn::make("tipoUsuario.nombre")->label("Tipo de Usuario"),
                 TextColumn::make("email")->label("Correo"),
-                IconColumn::make("status")->boolean(),
+                // IconColumn::make("status")->boolean(),
                 // TextColumn::make("status")->formatStateUsing(function ($state) {
                 //     return $state ? 'Activo' : 'Inactivo';
                 // }),

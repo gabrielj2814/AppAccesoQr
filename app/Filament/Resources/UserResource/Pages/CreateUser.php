@@ -56,11 +56,6 @@ class CreateUser extends CreateRecord
                     ->options($tipoUsuarioOpciones)
                     ->searchable()
                     ->required(),
-                Radio::make('status')
-                    ->boolean()
-                    ->inline()
-                    ->inlineLabel(false)
-                    ->required(),
             ]),
 
         ]);

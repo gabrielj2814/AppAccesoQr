@@ -14,7 +14,6 @@ class UsuarioRepository implements RepositoryBorradoSuave{
         $usuario= new User();
         $usuario->name=$datos["name"];
         $usuario->email=$datos["email"];
-        $usuario->status=$datos["status"];
         $usuario->id_perfil=$datos["id_perfil"];
         $usuario->id_persona=$datos["id_persona"];
         $usuario->id_tipo_usuario=$datos["id_tipo_usuario"];
@@ -27,7 +26,6 @@ class UsuarioRepository implements RepositoryBorradoSuave{
         $usuario= $this->consultarPorId($datos["id"]);
         $usuario->name=$datos["name"];
         $usuario->email=$datos["email"];
-        $usuario->status=$datos["status"];
         $usuario->id_perfil=$datos["id_perfil"];
         $usuario->id_persona=$datos["id_persona"];
         $usuario->id_tipo_usuario=$datos["id_tipo_usuario"];

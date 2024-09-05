@@ -53,11 +53,6 @@ class EditUser extends EditRecord
                     ->options($tipoUsuarioOpciones)
                     ->searchable()
                     ->required(),
-                Radio::make('status')
-                    ->boolean()
-                    ->inline()
-                    ->inlineLabel(false)
-                    ->required(),
             ]),
 
         ]);

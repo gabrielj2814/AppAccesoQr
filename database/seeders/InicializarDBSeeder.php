@@ -61,7 +61,6 @@ class InicializarDBSeeder extends Seeder
                 "id_perfil" => $perfil->id_perfil,
                 "id_persona" => $persona->id_persona,
                 "id_tipo_usuario" => $tipoUsuario->id_tipo_usuario,
-                "status" => true,
             ];
             $usuario=$this->UsuarioRepository->registrar($datos);
             $actualizarClave=[

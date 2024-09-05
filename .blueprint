@@ -6,13 +6,13 @@ created:
     - database/factories/PuertaFactory.php
     - database/factories/AccesoUsuarioFactory.php
     - database/factories/LogAccesoFactory.php
-    - database/migrations/2024_08_31_221134_create_qr_usuarios_table.php
-    - database/migrations/2024_08_31_221135_create_permisos_table.php
-    - database/migrations/2024_08_31_221136_create_permiso_perfils_table.php
-    - database/migrations/2024_08_31_221137_create_zonas_table.php
-    - database/migrations/2024_08_31_221138_create_puertas_table.php
-    - database/migrations/2024_08_31_221139_create_acceso_usuarios_table.php
-    - database/migrations/2024_08_31_221140_create_log_accesos_table.php
+    - database/migrations/2024_09_05_004938_create_qr_usuarios_table.php
+    - database/migrations/2024_09_05_004939_create_permisos_table.php
+    - database/migrations/2024_09_05_004940_create_permiso_perfils_table.php
+    - database/migrations/2024_09_05_004941_create_zonas_table.php
+    - database/migrations/2024_09_05_004942_create_puertas_table.php
+    - database/migrations/2024_09_05_004943_create_acceso_usuarios_table.php
+    - database/migrations/2024_09_05_004944_create_log_accesos_table.php
     - app/Models/QrUsuario.php
     - app/Models/Permiso.php
     - app/Models/PermisoPerfil.php
