@@ -1,8 +1,5 @@
 - [ ] crear modulo para que el usuario pueda gestionar sus propios qr
-  - [ ] filtrar por fecha de creación
-  - [ ] poder cambiar el estado del qr
   - [ ] poder agregar fecha de vencimiento
-  - [ ] no podrar eliminar el registro (borrado suave y tampoco poder recuperarlo)
 
 - [ ] Mejorar el disenó de la vista perfil
 
