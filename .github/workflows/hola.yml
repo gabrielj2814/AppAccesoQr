@@ -1,4 +1,4 @@
-name: app chida'
+name: app chida
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   hello_mundo:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: comando supremo
         run: echo "Bankai..."
