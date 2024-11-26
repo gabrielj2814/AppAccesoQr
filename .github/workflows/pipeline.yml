@@ -1,0 +1,22 @@
+name: deployment Pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: clonar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup PHP with tools
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: phpunit, pecl, composer
+      - name: instalar dependencias
+        run: composer install
