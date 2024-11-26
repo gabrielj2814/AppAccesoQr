@@ -1,0 +1,14 @@
+name: app chida'
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  hello_mundo:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: comando supremo
+        run: echo "Bankai..."
+
