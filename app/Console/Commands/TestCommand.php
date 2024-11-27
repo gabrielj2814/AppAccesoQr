@@ -12,7 +12,7 @@ class TestCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'test';
+    protected $signature = 'testcomando';
 
     /**
      * The console command description.

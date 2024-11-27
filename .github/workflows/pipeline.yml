@@ -13,10 +13,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      # - name: setup Node
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: '20'
       - name: Setup PHP with tools
         uses: shivammathur/setup-php@v2
         with:
@@ -24,10 +24,10 @@ jobs:
           tools: phpunit, pecl, composer
       - name: instalar dependencias php
         run: composer install
-      - name: instalar dependencias node
-        run: npm i
-      - name: build frontend
-        run: npm run build
+      # - name: instalar dependencias node
+      #   run: npm i
+      # - name: build frontend
+      #   run: npm run build
       - name: preparando laravel
         run:  |
           cp .env.ci .env
