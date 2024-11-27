@@ -28,3 +28,5 @@ jobs:
         run: npm i
       - name: build frontend
         run: npm run build
+      - name: Ejecutando test api laravel
+        run: php artisan test
