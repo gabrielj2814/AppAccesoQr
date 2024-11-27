@@ -28,5 +28,9 @@ jobs:
         run: npm i
       - name: build frontend
         run: npm run build
+      - name: preparando laravel
+        run:  |
+          cp .env.ci .env
+          php artisan key:generate
       - name: Ejecutando test api laravel
         run: php artisan test
