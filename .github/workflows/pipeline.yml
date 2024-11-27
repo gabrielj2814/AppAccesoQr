@@ -25,6 +25,6 @@ jobs:
       - name: instalar dependencias php
         run: composer install
       - name: instalar dependencias node
-        run: npm install --no-audit --no-fund --no-optional
+        run: npm i
       - name: build frontend
         run: npm run build
